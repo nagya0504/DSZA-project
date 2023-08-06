@@ -1,0 +1,22 @@
+body {
+    background-color: #F2B490;
+}
+
+.cnav {
+    background-color: #B18872;
+}
+
+h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2rem;
+}
+
+.reg {
+    background-color: #fff;
+    margin-right: 10%;
+}
+
+.reg-img {
+    width: 100%;
+    height: auto;
+}

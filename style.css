@@ -4,6 +4,8 @@ body {
 
 .cnav {
     background-color: #B18872;
+    border-radius: 10% 10% 0px 0px;
+    margin-bottom: 0px;
 }
 
 h1 {
@@ -14,9 +16,40 @@ h1 {
 .reg {
     background-color: #fff;
     margin-right: 10%;
+    margin-top: 0px;
+}
+
+.reg-form {
+    margin: 10% 25%;
 }
 
 .reg-img {
     width: 100%;
     height: auto;
+}
+
+.btn {
+    margin-top: 20px;
+    border-color: #F2B490;
+    color: #5f4334;
+}
+
+.btn:hover {
+    background-color: #F2B490;
+    border-color: #5f4334;
+}
+
+.btn:focus {
+    background-color: #B18872;
+    color: #B18872;
+}
+
+@media only screen and (max-width: 600px){
+    .reg-img {
+        display: none;
+    }
+    .reg-form {
+        margin-left: 50%;
+    }
+
 }

@@ -26,7 +26,7 @@ h1 {
     margin: 10% 25% 5% 25%;
 }
 
-.reg-img {
+.reg-img, .bej-img {
     width: 100%;
     height: auto;
 }

@@ -1,11 +1,14 @@
 body {
     background-color: #F2B490;
+    padding: 10px
 }
 
 .cnav {
     background-color: #B18872;
     border-radius: 10% 10% 0px 0px;
     margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 h1 {
@@ -13,14 +16,14 @@ h1 {
     font-size: 2rem;
 }
 
-.reg {
+.reg, .bej {
     background-color: #fff;
     margin-right: 10%;
     margin-top: 0px;
 }
 
-.reg-form {
-    margin: 10% 25%;
+.reg-form, .bej-form {
+    margin: 10% 25% 5% 25%;
 }
 
 .reg-img {
@@ -37,6 +40,7 @@ h1 {
 .btn:hover {
     background-color: #F2B490;
     border-color: #5f4334;
+    color: #5f4334;
 }
 
 .btn:focus {
@@ -45,11 +49,10 @@ h1 {
 }
 
 @media only screen and (max-width: 600px){
-    .reg-img {
+    .reg-img, .bej-img {
         display: none;
     }
-    .reg-form {
+    .reg-form, .bej-form {
         margin-left: 50%;
     }
-
 }

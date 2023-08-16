@@ -16,6 +16,8 @@ h1 {
     font-size: 2rem;
 }
 
+/* # BEJELENTKEZÉS, REGISZTRÁCIÓ */
+
 .reg, .bej {
     background-color: #fff;
     margin-right: 10%;
@@ -55,4 +57,42 @@ h1 {
     .reg-form, .bej-form {
         margin-left: 50%;
     }
+}
+
+/* # FŐOLDAL */
+
+.header {
+    background-color: #B18872;
+    border-radius: 10% 10% 0px 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 20px;
+}
+
+.header-img {
+    max-width: 100%;
+    max-height: auto;
+    border-radius: 10% 10% 0px 0px;
+}
+
+.navbar {
+    background-color: #5f4334;
+}
+.nav-link {
+    color: #fff;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+}
+
+.search-btn {
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.search-btn-img {
+    max-width: 30px;
+    display: block;
+    margin: auto;
 }

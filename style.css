@@ -1,6 +1,8 @@
 body {
     background-color: #F2B490;
-    padding: 10px
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .cnav {
@@ -99,9 +101,26 @@ h1 {
 
 .card {
     padding: 20px;
-    margin: 25px;
+    margin: 30px;
 }
 
 .btn-product {
     float: right;
+}
+
+.footer-element {
+    text-align: center;
+}
+
+footer {
+    background-color: #5f4334;
+    padding: 30px;
+    color: #fff;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+}
+
+.email {
+    text-decoration: none;
+    color: #fff;
 }

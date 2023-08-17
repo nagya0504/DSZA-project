@@ -96,3 +96,12 @@ h1 {
     display: block;
     margin: auto;
 }
+
+.card {
+    padding: 20px;
+    margin: 25px;
+}
+
+.btn-product {
+    float: right;
+}

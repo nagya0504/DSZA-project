@@ -24,20 +24,37 @@ VALUES(NULL, username, familyName, givenName, email, SHA2(pwd, 256), phone, town
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete fav`(IN `userId` INT, IN `bookId` INT)
-DELETE FROM `favourites`
-WHERE `favourites`.`user_id` = userId AND `favourites`.`product_id` = bookId$$
-DELIMITER ;
-
-DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteBook`(IN `id` INT)
 DELETE FROM `product`
 WHERE `product`.`id` = id$$
 DELIMITER ;
 
 DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteFav`(IN `userId` INT, IN `bookId` INT)
+DELETE FROM `favourites`
+WHERE `favourites`.`user_id` = userId AND `favourites`.`product_id` = bookId$$
+DELIMITER ;
+
+DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteUser`(IN `id` INT)
 DELETE FROM `user` WHERE `user`.`id` = id$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `login`(IN `email` VARCHAR(50), IN `pwd` VARCHAR(255))
+BEGIN
+    DECLARE user_count INT;
+
+    SELECT COUNT(*) INTO user_count
+    FROM `user`
+    WHERE `user`.`email` = email AND `user`.`pwd` = SHA2(pwd, 256);
+
+    IF user_count = 1 THEN
+        SELECT 'Login successful' AS result;
+    ELSE
+        SELECT 'Login failed' AS result;
+    END IF;
+END$$
 DELIMITER ;
 
 DELIMITER $$

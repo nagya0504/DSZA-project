@@ -171,3 +171,25 @@ footer {
     max-width: 350px;
     height: auto;
 }
+
+/* # KÖNYVFELTÖLTÉS */
+
+.book-form .btn {
+    background-color: #fff;
+}
+
+.book-form .btn:hover {
+    background-color: #5f4334;
+    color: #fff;
+}
+
+#desc {
+    width: 400px;
+    height: 200px;
+}
+
+.upload-img {
+    width: 100%;
+    height: auto;
+    border: #5f4334 2px solid;
+}

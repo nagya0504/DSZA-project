@@ -137,3 +137,30 @@ footer {
     margin: 10px;
     background-color: #fff;
 }
+
+/* # PROFIL */
+
+.profilebtn {
+    background-color: #fff;
+    margin: 10px auto;
+}
+
+.profilebtn:hover {
+    background-color: #5f4334;
+    color: #fff;
+}
+
+.btn-group-vertical {
+    margin: auto 0px;
+}
+
+.profilecol {
+    display: flex;
+    align-items: center;
+    padding: auto;
+}
+
+.felhasznalo {
+    justify-content: center;
+    text-align: center;
+}

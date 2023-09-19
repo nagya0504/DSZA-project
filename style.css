@@ -193,3 +193,25 @@ footer {
     height: auto;
     border: #5f4334 2px solid;
 }
+
+/* # SCROLLBAR */
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+  
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #5f4334; 
+    border-radius: 10px 0px 0px 10px;
+}
+   
+::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 5px #5f4334;
+    background: #B18872; 
+    border-radius: 10px 0px 0px 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5f4334; 
+    box-shadow: inset 0 0 5px #B18872;
+}

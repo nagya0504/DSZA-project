@@ -164,3 +164,10 @@ footer {
     justify-content: center;
     text-align: center;
 }
+
+/* # KEDVENCEK */
+
+.card {
+    max-width: 350px;
+    height: auto;
+}

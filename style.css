@@ -13,6 +13,10 @@ body {
     margin-right: 0px;
 }
 
+.kereses:focus {
+    box-shadow:0 0 5px 2px #F2B490;
+}
+
 h1 {
     font-family: 'Times New Roman', Times, serif;
     font-size: 2rem;
@@ -131,4 +135,5 @@ footer {
 
 .aboutus-content {
     margin: 10px;
+    background-color: #fff;
 }

@@ -93,6 +93,11 @@ SELECT * from `user` WHERE `user`.`role_id` = 2$$
 DELIMITER ;
 
 DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `selectProduct`(IN `id` INT)
+SELECT * FROM `product` WHERE `product`.`id` = id$$
+DELIMITER ;
+
+DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateBookAuthor`(IN `id` INT, IN `newAuthor` VARCHAR(100))
 UPDATE `product`
 SET `product`.`author` = newAuthor
@@ -135,15 +140,10 @@ WHERE `product`.`id` = id$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `selectProduct`(IN `id` INT)
-SELECT * FROM `product` WHERE `product`.`id` = id$$
-DELIMITER ;
-
-DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUserPassword`(IN `id` INT, IN `newPwd` VARCHAR(50))
 UPDATE `user`
 SET `user`.`pwd` = newPwd
-WHERE `user`.`id` = idIN$$
+WHERE `user`.`id` = id$$
 DELIMITER ;
 
 DELIMITER $$
@@ -157,12 +157,12 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUserTown`(IN `id` INT(11), IN `newTown` VARCHAR(100))
 UPDATE `user`
 SET `user`.`town` = newTown
-WHERE `user`.`id` = idIN$$
+WHERE `user`.`id` = id$$
 DELIMITER ;
 
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUserUsername`(IN `id` INT(11), IN `newUsername` VARCHAR(50))
 UPDATE `user`
 SET `user`.`username` = newUsername
-WHERE `user`.`id` = idIN$$
+WHERE `user`.`id` = id$$
 DELIMITER ;

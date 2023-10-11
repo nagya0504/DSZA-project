@@ -17,10 +17,18 @@
     <div class="reg container-fluid mr-5 p-3"> <!-- # reg = regisztráció -->
         <div class="row">
             <div class="col-6">
-                <form class="reg-form" action="">
+                <form id="regform" class="reg-form" action="">
                     <input type="text" id="username" name="username">
                     <br>
-                    <label for="username">Teljes név</label>
+                    <label for="username">Felhasználónév</label>
+                    <br>
+                    <input type="text" id="familyname" name="familyname">
+                    <br>
+                    <label for="familyname">Családnév</label>
+                    <br>
+                    <input type="text" id="givenname" name="givenname">
+                    <br>
+                    <label for="username">Keresztnév</label>
                     <br>
                     <input type="email" id="email" name="email">
                     <br>
@@ -49,5 +57,7 @@
         </div>
     </div>
 </div>
+
+<script src="js/reg.js"></script>
 </body>
 </html>

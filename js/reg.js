@@ -30,21 +30,21 @@ document.getElementById('regform').addEventListener('submit', function (event) {
   event.preventDefault(); // Prevent the default form submission
 
   // Get user data from input fields
-  const username = form.elements['username'].value;
-  const familyname = form.elements['familyname'].value;
-  const givenname = form.elements['givenname'].value;
-  const email = form.elements['email'].value;
-  const password = form.elements['pwd'].value;
-  const phone = form.elements['phone'].value;
-  const town = form.elements['town'].value;
+  const username = document.getElementById('username').value;
+  const familyname = document.getElementById('familyname').value;
+  const givenname = document.getElementById('givenname').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('pwd').value;
+  const phone = document.getElementById('phone').value;
+  const town = document.getElementById('town').value;
 
   // Create a user data object
   const userData = {
     username: username,
-    familyname: familyname,
-    givenname: givenname,
+    familyName: familyname,
+    givenName: givenname,
     email: email,
-    password: password,
+    pwd: password,
     phone: phone,
     town: town,
   };
@@ -52,3 +52,4 @@ document.getElementById('regform').addEventListener('submit', function (event) {
   // Call the addUserToServer function with the user data
   addUserToServer(userData);
 });
+

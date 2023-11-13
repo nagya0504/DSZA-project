@@ -143,6 +143,7 @@ footer {
 .profilebtn {
     background-color: #fff;
     margin: 30px auto;
+    border-color: #5f4334;
 }
 
 .profilebtn:hover {
@@ -163,6 +164,20 @@ footer {
 .felhasznalo {
     justify-content: center;
     text-align: center;
+}
+
+.updatebtn{
+    background-color: #5f4334;
+    color: #fff;
+    margin: 30px auto;
+}
+
+.toggleDiv {
+    display: none;
+}
+
+.toggleDiv:target {
+    display: block;
 }
 
 /* # KEDVENCEK */

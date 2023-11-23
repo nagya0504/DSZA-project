@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Sze 26. 09:48
+-- Létrehozás ideje: 2023. Nov 23. 10:16
 -- Kiszolgáló verziója: 10.4.27-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -54,6 +54,16 @@ WHERE `favourites`.`user_id` = userId AND `favourites`.`product_id` = bookId$$
 
 DROP PROCEDURE IF EXISTS `deleteUser`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteUser` (IN `id` INT)   DELETE FROM `user` WHERE `user`.`id` = id$$
+
+DROP PROCEDURE IF EXISTS `logDeleteBook`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `logDeleteBook` (IN `id` INT)   UPDATE `product`
+SET `product`.`status_id` = 4, `product`.`deleted_at` = NOW()
+WHERE `product`.`id` = id$$
+
+DROP PROCEDURE IF EXISTS `logDeleteUser`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `logDeleteUser` (IN `id` INT)   UPDATE `user`
+SET `user`.`deleted_at` = NOW()
+WHERE `user`.`id` = id$$
 
 DROP PROCEDURE IF EXISTS `login`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `login` (IN `email` VARCHAR(50), IN `pwd` VARCHAR(255))   BEGIN
@@ -127,7 +137,7 @@ WHERE `product`.`id` = id$$
 DROP PROCEDURE IF EXISTS `updateUserPassword`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUserPassword` (IN `id` INT, IN `newPwd` VARCHAR(50))   UPDATE `user`
 SET `user`.`pwd` = newPwd
-WHERE `user`.`id` = idIN$$
+WHERE `user`.`id` = id$$
 
 DROP PROCEDURE IF EXISTS `updateUserPhone`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUserPhone` (IN `id` INT, IN `newPhone` VARCHAR(15))   UPDATE `user`
@@ -137,12 +147,12 @@ WHERE `user`.`id` = idIN$$
 DROP PROCEDURE IF EXISTS `updateUserTown`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUserTown` (IN `id` INT(11), IN `newTown` VARCHAR(100))   UPDATE `user`
 SET `user`.`town` = newTown
-WHERE `user`.`id` = idIN$$
+WHERE `user`.`id` = id$$
 
 DROP PROCEDURE IF EXISTS `updateUserUsername`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUserUsername` (IN `id` INT(11), IN `newUsername` VARCHAR(50))   UPDATE `user`
 SET `user`.`username` = newUsername
-WHERE `user`.`id` = idIN$$
+WHERE `user`.`id` = id$$
 
 DELIMITER ;
 
@@ -158,6 +168,13 @@ CREATE TABLE `favourites` (
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- A tábla adatainak kiíratása `favourites`
+--
+
+INSERT INTO `favourites` (`id`, `user_id`, `product_id`) VALUES
+(1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -175,8 +192,17 @@ CREATE TABLE `product` (
   `description` text NOT NULL,
   `image` varchar(100) DEFAULT NULL COMMENT 'kép helyét jelöli',
   `status_id` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- A tábla adatainak kiíratása `product`
+--
+
+INSERT INTO `product` (`id`, `user_id`, `title`, `author`, `price`, `description`, `image`, `status_id`, `created_at`, `deleted_at`) VALUES
+(1, 1, 'asd', 'asd asd', 0, 'valami szép könyv', NULL, 4, '2023-09-26 08:19:50', '2023-11-23 08:40:56'),
+(4, 2, 'aaaa', 'ssssss', 222222, 'könyv', '', 1, '2023-09-26 09:04:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -217,7 +243,8 @@ CREATE TABLE `status` (
 INSERT INTO `status` (`id`, `name`) VALUES
 (1, 'elérhető'),
 (2, 'lefoglalva'),
-(3, 'eladva');
+(3, 'eladva'),
+(4, 'törölt');
 
 -- --------------------------------------------------------
 
@@ -247,9 +274,15 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `family_name`, `given_name`, `email`, `pwd`, `phone`, `town`, `role_id`, `created_at`, `last_login`, `deleted_at`) VALUES
 (2, 'admin1', 'ad', 'min', 'admin@proba.com', '67ed8e80ce399188b15e9128b9777790ca6b6d1a63cb32d95a35f2a20d3ca00c', '+36123456789', 'asd', 1, '2023-08-01 10:12:20', '2023-08-01 10:12:20', NULL),
-(3, 'user1', 'us', 'er', 'user1@proba.com', '67ed8e80ce399188b15e9128b9777790ca6b6d1a63cb32d95a35f2a20d3ca00c', '123', 'asd', 2, '2023-08-01 10:13:59', '2023-08-01 10:13:59', NULL),
+(3, 'user1', 'us', 'er', 'user1@proba.com', '67ed8e80ce399188b15e9128b9777790ca6b6d1a63cb32d95a35f2a20d3ca00c', '123', 'asd', 2, '2023-08-01 10:13:59', '2023-08-01 10:13:59', '2023-11-23 08:43:34'),
 (5, 'u2', 'pelda', 'pelda', 'aaaaaa@email.com', '67ed8e80ce399188b15e9128b9777790ca6b6d1a63cb32d95a35f2a20d3ca00c', '+12345210', 'varos', 2, '2023-09-05 19:27:53', '2023-09-05 19:27:53', NULL),
-(6, 'aaa', 'pél', 'da', 'user2@proba.com', '67ed8e80ce399188b15e9128b9777790ca6b6d1a63cb32d95a35f2a20d3ca00c', '+14253625', 'városka', 2, '2023-09-06 07:30:21', '2023-09-06 07:30:21', NULL);
+(7, 'postmanproba', 'Postás', 'Pat', 'probatest@gmail.com', '67ed8e80ce399188b15e9128b9777790ca6b6d1a63cb32d95a35f2a20d3ca00c', '+39 20 123 4321', 'Kukutyin', 2, '2023-09-26 09:18:19', '2023-09-26 09:18:19', NULL),
+(8, 'adminpostmanproba', 'adminPostás', 'adminPat', 'adminprobatest@gmail.com', '67ed8e80ce399188b15e9128b9777790ca6b6d1a63cb32d95a35f2a20d3ca00c', '+39 20 1234 321', 'újváros', 1, '2023-09-26 09:30:41', '2023-09-26 09:30:41', NULL),
+(9, 'aaaaaa', 'falnak', 'megyek', 'abc@abc.com', '67ed8e80ce399188b15e9128b9777790ca6b6d1a63cb32d95a35f2a20d3ca00c', '+123454321', 'város', 2, '2023-10-11 13:35:27', '2023-10-11 13:35:27', NULL),
+(10, 'user2', 'a', 'b', 'abc@aaa.com', '67ed8e80ce399188b15e9128b9777790ca6b6d1a63cb32d95a35f2a20d3ca00c', '1234', 'aaaaa', 2, '2023-10-16 13:20:19', '2023-10-16 13:20:19', NULL),
+(11, 'postman', 'post', 'man', 'postmanemail@aaaa.com', '67ed8e80ce399188b15e9128b9777790ca6b6d1a63cb32d95a35f2a20d3ca00c', '11223344', 'város', 2, '2023-10-16 13:25:17', '2023-10-16 13:25:17', NULL),
+(13, 'postman', 'post', 'man', 'postmane@aaaa.com', '67ed8e80ce399188b15e9128b9777790ca6b6d1a63cb32d95a35f2a20d3ca00c', '11223344', 'város', 2, '2023-10-16 13:51:51', '2023-10-16 13:51:51', NULL),
+(14, 'aaaaaaaaa', 'aaaaaaaaa', 'aaaaaaaaaa', 'aaaaa@aaaaa.aaaaa', '67ed8e80ce399188b15e9128b9777790ca6b6d1a63cb32d95a35f2a20d3ca00c', '111111', 'aaaaaaaaa', 2, '2023-10-16 13:52:05', '2023-10-16 13:52:05', NULL);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -296,13 +329,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT a táblához `favourites`
 --
 ALTER TABLE `favourites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT a táblához `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT a táblához `role`
@@ -314,13 +347,13 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT a táblához `status`
 --
 ALTER TABLE `status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT a táblához `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

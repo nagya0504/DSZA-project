@@ -1,0 +1,269 @@
+body {
+    background-color: #F2B490;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.cnav {
+    background-color: #B18872;
+    border-radius: 10% 10% 0px 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.kereses:focus {
+    box-shadow:0 0 5px 2px #F2B490;
+}
+
+h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2rem;
+}
+
+/* # BEJELENTKEZÉS, REGISZTRÁCIÓ */
+
+.reg, .bej {
+    background-color: #fff;
+    margin-right: 10%;
+    margin-top: 0px;
+}
+
+.reg-form, .bej-form {
+    margin: 10% 25% 5% 25%;
+}
+
+.reg-img, .bej-img {
+    width: 100%;
+    height: auto;
+}
+
+.btn {
+    margin-top: 20px;
+    border-color: #F2B490;
+    color: #5f4334;
+}
+
+.btn:hover {
+    background-color: #F2B490;
+    border-color: #5f4334;
+    color: #5f4334;
+}
+
+.btn:focus {
+    background-color: #B18872;
+    color: #B18872;
+}
+
+@media only screen and (max-width: 600px){
+    .reg-img, .bej-img {
+        display: none;
+    }
+    .reg-form, .bej-form {
+        margin-left: 50%;
+    }
+}
+
+/* # FŐOLDAL */
+
+.header {
+    background-color: #B18872;
+    border-radius: 10% 10% 0px 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 20px;
+}
+
+.header-img {
+    max-width: 100%;
+    max-height: auto;
+    border-radius: 10% 10% 0px 0px;
+}
+
+.navbar {
+    background-color: #5f4334;
+}
+.nav-link {
+    color: #fff;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+}
+
+.search-btn {
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.search-btn-img {
+    max-width: 30px;
+    display: block;
+    margin: auto;
+}
+
+.card {
+    padding: 20px;
+    margin: 30px;
+}
+
+.btn-product {
+    float: right;
+}
+
+.footer-element {
+    text-align: center;
+}
+
+footer {
+    background-color: #5f4334;
+    padding: 30px;
+    color: #fff;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+}
+
+.email {
+    text-decoration: none;
+    color: #fff;
+}
+
+.h1 {
+    margin: 20px 0px;
+}
+
+.aboutus-content {
+    margin: 10px;
+    background-color: #fff;
+}
+
+/* # PROFIL */
+
+.profilebtn {
+    background-color: #fff;
+    margin: 30px auto;
+    border-color: #5f4334;
+}
+
+.profilebtn:hover {
+    background-color: #5f4334;
+    color: #fff;
+}
+
+.btn-group-vertical {
+    margin: auto 0px;
+}
+
+.profilecol {
+    display: flex;
+    align-items: center;
+    padding: auto;
+}
+
+.felhasznalo {
+    justify-content: center;
+    text-align: center;
+}
+
+.updatebtn{
+    background-color: #5f4334;
+    color: #fff;
+    margin: 30px auto;
+}
+
+.toggleDiv {
+    display: none;
+}
+
+.toggleDiv:target {
+    display: block;
+}
+
+/* # KEDVENCEK */
+
+.card {
+    max-width: 350px;
+    height: auto;
+}
+
+/* # KÖNYVFELTÖLTÉS */
+
+.book-form .btn {
+    background-color: #fff;
+}
+
+.book-form .btn:hover {
+    background-color: #5f4334;
+    color: #fff;
+}
+
+#desc {
+    width: 400px;
+    height: 200px;
+}
+
+.upload-img {
+    width: 100%;
+    height: auto;
+    border: #5f4334 2px solid;
+}
+
+/* # SCROLLBAR */
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+  
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #5f4334; 
+    border-radius: 10px 0px 0px 10px;
+}
+   
+::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 5px #5f4334;
+    background: #B18872; 
+    border-radius: 10px 0px 0px 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5f4334; 
+    box-shadow: inset 0 0 5px #B18872;
+}
+
+/* # PRODUCT */
+
+.product-content {
+    background-color: #fff;
+    margin-right: 0px;
+}
+
+.product-img {
+    max-width: 600px;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.row {
+    margin-right: 0;
+}
+
+.product {
+    margin: 15px 0;
+}
+
+.uploader {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.product-desc {
+    margin-top: 40px;
+}
+
+@media only screen and (max-width: 600px){
+    .product-img {
+        max-width: 200px;
+    }
+}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil</title>
+    <title>Termék szerkesztése</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -53,62 +53,24 @@
       </div>
 </nav>
 
-<!-- # PROFIL ELEMEK -->
-
-<div class="container">
-    <div class="row">
-        <div class="col-lg">
-            <div class="btn-group-vertical">
-                <a href="#toggleDivUsername" id="toggleButtonUsername" class="btn btn-product profilebtn">Felhasználónév megváltoztatása</a>
-                <div id="toggleDivUsername" class="toggleDiv">
-                    <input type="text" id="username" name="username">
-                    <br>
-                    <label for="username">Új felhasználónév</label>
-                    <br>
-                    <input class="updatebtn btn" type="submit" value="Felhasználónév megváltoztatása">
-                    <br>
-                </div>
-                <a href="#toggleDivPassword" id="toggleButtonPassword" class="btn btn-product profilebtn">Jelszó megváltoztatása</a>
-                <div id="toggleDivPassword" class="toggleDiv">
-                    <input type="password" id="pwd" name="pwd">
-                    <br>
-                    <label for="pwd">Új jelszó</label>
-                    <br>
-                    <input type="password" id="pwd2" name="pwd2">
-                    <br>
-                    <label for="pwd2">Jelszó mégegyszer</label>
-                    <br>
-                    <input class="updatebtn btn" type="submit" value="Jelszó megváltoztatása">
-                </div>
-                <a href="#toggleDivTown" id="toggleButtonTown" class="btn btn-product profilebtn">Város megváltoztatása</a>
-                <div id="toggleDivTown" class="toggleDiv">
-                    <input type="text" id="town" name="town">
-                    <br>
-                    <label for="town">Új város</label>
-                    <br>
-                    <input class="updatebtn btn" type="submit" value="Város megváltoztatása">
-                    <br>
-                </div>
-                <a href="#toggleDivPhone" id="toggleButtonPhone" class="btn btn-product profilebtn">Telefonszám megváltoztatása</a>
-                <div id="toggleDivPhone" class="toggleDiv">
-                    <input type="text" id="phone" name="phone">
-                    <br>
-                    <label for="phone">Új telefonszám</label>
-                    <br>
-                    <input class="updatebtn btn" type="submit" value="Telefonszám megváltoztatása">
-                    <br>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg profilecol">
-            <div class="felhasznalo">
-            <p><strong>Bejelentkezve:</strong></p>
-            <p>Példa felhasználó</p>
-            <a href="newbook.html" class="btn btn-product profilebtn">Új könyv feltöltése</a>
-            <a href="favourites.html" class="btn btn-product profilebtn">Kedvencek</a>
-            <a href="ownproducts.html" class="btn btn-product profilebtn">Saját könyvek</a>
-            </div>
-        </div>
+<div class="row product">
+    <div class="col-lg-6">
+        <img class="product-img" src="img/card-img.png" alt="product képe">
+    </div>
+    <div class="col-lg-6 product-content">
+        <h1 class="h1"><b>Product</b></h1>
+        <h5 class="uploader"><b>Feltöltő</b></h5>
+        <br>
+        <h5 class="uploader">Jelenlegi leírás:</h5>
+        <p class="product-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam nulla accusamus harum a cum temporibus illo, veritatis excepturi placeat cupiditate doloribus necessitatibus saepe dolores libero magni dolor iure nihil molestiae.</p>
+        <label for="desc">Új leírás:</label>
+        <br>
+        <form>
+            <textarea class="textarea" id="desc" name="desc"></textarea>
+            <br>
+            <input class="btn" type="submit" value="Mentés">
+        </form>
+        <a href="ownproducts.html"><button class="btn btn-nvm">Mégse</button></a>
     </div>
 </div>
 

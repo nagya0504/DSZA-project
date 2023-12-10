@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil</title>
+    <title>Saját termékek</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -53,60 +53,78 @@
       </div>
 </nav>
 
-<!-- # PROFIL ELEMEK -->
-
+<!-- ! db-ből userid alapján -->
 <div class="container">
+    <!-- sor 1 -->
     <div class="row">
         <div class="col-lg">
-            <div class="btn-group-vertical">
-                <a href="#toggleDivUsername" id="toggleButtonUsername" class="btn btn-product profilebtn">Felhasználónév megváltoztatása</a>
-                <div id="toggleDivUsername" class="toggleDiv">
-                    <input type="text" id="username" name="username">
-                    <br>
-                    <label for="username">Új felhasználónév</label>
-                    <br>
-                    <input class="updatebtn btn" type="submit" value="Felhasználónév megváltoztatása">
-                    <br>
-                </div>
-                <a href="#toggleDivPassword" id="toggleButtonPassword" class="btn btn-product profilebtn">Jelszó megváltoztatása</a>
-                <div id="toggleDivPassword" class="toggleDiv">
-                    <input type="password" id="pwd" name="pwd">
-                    <br>
-                    <label for="pwd">Új jelszó</label>
-                    <br>
-                    <input type="password" id="pwd2" name="pwd2">
-                    <br>
-                    <label for="pwd2">Jelszó mégegyszer</label>
-                    <br>
-                    <input class="updatebtn btn" type="submit" value="Jelszó megváltoztatása">
-                </div>
-                <a href="#toggleDivTown" id="toggleButtonTown" class="btn btn-product profilebtn">Város megváltoztatása</a>
-                <div id="toggleDivTown" class="toggleDiv">
-                    <input type="text" id="town" name="town">
-                    <br>
-                    <label for="town">Új város</label>
-                    <br>
-                    <input class="updatebtn btn" type="submit" value="Város megváltoztatása">
-                    <br>
-                </div>
-                <a href="#toggleDivPhone" id="toggleButtonPhone" class="btn btn-product profilebtn">Telefonszám megváltoztatása</a>
-                <div id="toggleDivPhone" class="toggleDiv">
-                    <input type="text" id="phone" name="phone">
-                    <br>
-                    <label for="phone">Új telefonszám</label>
-                    <br>
-                    <input class="updatebtn btn" type="submit" value="Telefonszám megváltoztatása">
-                    <br>
+            <div class="card">
+                <img src="img/card-img.png" class="card-img-top" alt="card image"/>
+                <div class="card-body">
+                    <h5 class="card-title">Könyv példa</h5>
+                    <p class="card-text">Egy rövid leírás a könyvről.</p>
+                    <a href="editproduct.html" class="btn btn-product">Szerkesztés</a>
+                    <a class="btn btn-del btn-product">Törlés</a>
                 </div>
             </div>
         </div>
-        <div class="col-lg profilecol">
-            <div class="felhasznalo">
-            <p><strong>Bejelentkezve:</strong></p>
-            <p>Példa felhasználó</p>
-            <a href="newbook.html" class="btn btn-product profilebtn">Új könyv feltöltése</a>
-            <a href="favourites.html" class="btn btn-product profilebtn">Kedvencek</a>
-            <a href="ownproducts.html" class="btn btn-product profilebtn">Saját könyvek</a>
+        <div class="col-lg">
+            <div class="card">
+                <img src="img/card-img.png" class="card-img-top" alt="card image"/>
+                <div class="card-body">
+                    <h5 class="card-title">Könyv példa</h5>
+                    <p class="card-text">Egy rövid leírás a könyvről.</p>
+                    <a href="editproduct.html" class="btn btn-product">Szerkesztés</a>
+                    <a class="btn btn-del btn-product">Törlés</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg">
+            <div class="card">
+                <img src="img/card-img.png" class="card-img-top" alt="card image"/>
+                <div class="card-body">
+                    <h5 class="card-title">Könyv példa</h5>
+                    <p class="card-text">Egy rövid leírás a könyvről.</p>
+                    <a href="editproduct.html" class="btn btn-product">Szerkesztés</a>
+                    <a class="btn btn-del btn-product">Törlés</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- sor 2 -->
+    <div class="row">
+        <div class="col-lg">
+            <div class="card">
+                <img src="img/card-img.png" class="card-img-top" alt="card image"/>
+                <div class="card-body">
+                    <h5 class="card-title">Könyv példa</h5>
+                    <p class="card-text">Egy rövid leírás a könyvről.</p>
+                    <a href="editproduct.html" class="btn btn-product">Szerkesztés</a>
+                    <a class="btn btn-del btn-product">Törlés</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg">
+            <div class="card">
+                <img src="img/card-img.png" class="card-img-top" alt="card image"/>
+                <div class="card-body">
+                    <h5 class="card-title">Könyv példa</h5>
+                    <p class="card-text">Egy rövid leírás a könyvről.</p>
+                    <a href="editproduct.html" class="btn btn-product">Szerkesztés</a>
+                    <a class="btn btn-del btn-product">Törlés</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg">
+            <div class="card">
+                <img src="img/card-img.png" class="card-img-top" alt="card image"/>
+                <div class="card-body">
+                    <h5 class="card-title">Könyv példa</h5>
+                    <p class="card-text">Egy rövid leírás a könyvről.</p>
+                    <a href="editproduct.html" class="btn btn-product">Szerkesztés</a>
+                    <a class="btn btn-del btn-product">Törlés</a>
+                </div>
             </div>
         </div>
     </div>

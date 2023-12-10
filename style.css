@@ -267,3 +267,27 @@ footer {
         max-width: 200px;
     }
 }
+
+/* # EDIT PRODUCT */
+
+.btn-nvm {
+    color: red;
+    border-color: red;
+    margin-bottom: 10px;
+}
+
+.btn-nvm:hover {
+    background-color: red;
+}
+
+/* # OWNED PRODUCT */
+
+.btn-del {
+    color: red;
+    border-color: red;
+    margin-right: 10px;
+}
+
+.btn-del:hover {
+    background-color: red;
+}

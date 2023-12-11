@@ -1,23 +1,30 @@
-// Example GET request
-fetch('http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/user/login', {
-  method: 'POST',
+const apiUrl = 'http://127.0.0.1:8080/com.bookmark_bookmark_war_1.0-SNAPSHOTPU'; // replace with your actual API base URL
+
+const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+fetch(`${apiUrl}/selectUserByEmail`, {
+  method: 'GET',
   headers: {
     'Content-Type': 'application/json',
-    'Accept': 'application/json'
-    // Add any necessary headers like authentication tokens
+    // token
   },
+  body: JSON.stringify({
+    email: email,
+    pwd: password
+  }),
 })
-.then(response =>{
-    // Check if the response status is OK (200)
+  .then(response => {
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    // Parse the response body as JSON and return it
     return response.json();
   })
-.then(data => {
-    console.log('Response data:', data);
-})
-.catch(error => {
+  .then(data => {
+    // Handle the response data
+    console.log(data);
+  })
+  .catch(error => {
+    // Handle errors
     console.error('Error:', error);
-});
+  });

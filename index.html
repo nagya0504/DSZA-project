@@ -54,76 +54,38 @@
 </nav>
 
 <!-- # CARDS -->
-<!-- ! ez még később updatelve lesz, hogy a kártyákból annyi jelenjen meg, ahány sor van a db-ben -->
 
-<div class="container">
-    <!-- sor 1 -->
-    <div class="row">
-        <div class="col-lg">
-            <div class="card">
-                <img src="img/card-img.png" class="card-img-top" alt="card image"/>
-                <div class="card-body">
-                    <h5 class="card-title">Könyv példa</h5>
-                    <p class="card-text">Egy rövid leírás a könyvről.</p>
-                    <a href="product.html" class="btn btn-product">Megnézem</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg">
-            <div class="card">
-                <img src="img/card-img.png" class="card-img-top" alt="card image"/>
-                <div class="card-body">
-                    <h5 class="card-title">Könyv példa</h5>
-                    <p class="card-text">Egy rövid leírás a könyvről.</p>
-                    <a href="product.html" class="btn btn-product">Megnézem</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg">
-            <div class="card">
-                <img src="img/card-img.png" class="card-img-top" alt="card image"/>
-                <div class="card-body">
-                    <h5 class="card-title">Könyv példa</h5>
-                    <p class="card-text">Egy rövid leírás a könyvről.</p>
-                    <a href="product.html" class="btn btn-product">Megnézem</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- sor 2 -->
-    <div class="row">
-        <div class="col-lg">
-            <div class="card">
-                <img src="img/card-img.png" class="card-img-top" alt="card image"/>
-                <div class="card-body">
-                    <h5 class="card-title">Könyv példa</h5>
-                    <p class="card-text">Egy rövid leírás a könyvről.</p>
-                    <a href="product.html" class="btn btn-product">Megnézem</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg">
-            <div class="card">
-                <img src="img/card-img.png" class="card-img-top" alt="card image"/>
-                <div class="card-body">
-                    <h5 class="card-title">Könyv példa</h5>
-                    <p class="card-text">Egy rövid leírás a könyvről.</p>
-                    <a href="product.html" class="btn btn-product">Megnézem</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg">
-            <div class="card">
-                <img src="img/card-img.png" class="card-img-top" alt="card image"/>
-                <div class="card-body">
-                    <h5 class="card-title">Könyv példa</h5>
-                    <p class="card-text">Egy rövid leírás a könyvről.</p>
-                    <a href="product.html" class="btn btn-product">Megnézem</a>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="container" id="productContainer">
+    <!-- Products -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Fetch data from the Java REST API
+        fetch('http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/selectAllBooks', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Update the HTML content with the fetched data
+            const productContainer = document.getElementById('productContainer');
+            data.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'row';
+                card.innerHTML = `
+                <h5 class="card-title">${product.title}</h5>
+                    <img src="${product.image}" class="card-img-top" alt="card image"/>
+                    <p class="card-text">${product.description}</p>
+                    <p class="card-text">${product.author}</p>
+                    <p class="card-text">${product.price}</p>
+                    <a href="product.html" class="btn btn-product">Megnézem</a>`;
+                productContainer.appendChild(card);
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    });
+    </script>
 </div>
 
 <!-- # FOOTER -->	

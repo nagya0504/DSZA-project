@@ -71,15 +71,19 @@
             // Update the HTML content with the fetched data
             const productContainer = document.getElementById('productContainer');
             data.forEach(product => {
+                const cardColumn = document.createElement('div');
+                cardColumn.className = 'col-lg';
+
                 const card = document.createElement('div');
-                card.className = 'row';
+                card.className = 'card';
                 card.innerHTML = `
-                <h5 class="card-title">${product.title}</h5>
-                    <img src="${product.image}" class="card-img-top" alt="card image"/>
-                    <p class="card-text">${product.description}</p>
-                    <p class="card-text">${product.author}</p>
-                    <p class="card-text">${product.price}</p>
-                    <a href="product.html" class="btn btn-product">Megnézem</a>`;
+                <img src="${product.image}" class="card-img-top" alt="card image"/>
+                    <div class="card-body">
+                        <h5 class="card-title">${product.title}</h5>
+                        <p class="card-text">${product.description}</p>
+                        <a href="editproduct.html" class="btn btn-product">Szerkesztés</a>
+                        <a class="btn btn-del btn-product">Törlés</a>
+                    </div>`;
                 productContainer.appendChild(card);
             });
         })

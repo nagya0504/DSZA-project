@@ -1,30 +1,43 @@
-const apiUrl = 'http://127.0.0.1:8080/com.bookmark_bookmark_war_1.0-SNAPSHOTPU'; // replace with your actual API base URL
+var login = document.getElementById("login");
 
-const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+login.addEventListener("click", async (e) => {
+  e.preventDefault();
+  
+  var email = document.getElementById("email");
+  var pwd = document.getElementById("pwd");
 
-fetch(`${apiUrl}/selectUserByEmail`, {
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json',
-    // token
-  },
-  body: JSON.stringify({
-    email: email,
-    pwd: password
-  }),
-})
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then(data => {
-    // Handle the response data
-    console.log(data);
-  })
-  .catch(error => {
-    // Handle errors
-    console.error('Error:', error);
-  });
+  console.log(email.value + pwd.value + "asd");
+
+      const postData = JSON.stringify({
+          "email": email.value,
+          "pwd": pwd.value
+      });
+
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: postData,
+        redirect: 'follow'
+      };
+
+      try {
+        const response = await fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/user/selectUserByEmail", requestOptions);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    
+        const result = await response.text();
+        console.log(result);
+    
+        const Token = result;
+        localStorage.setItem('Token', Token);
+        window.location.href = '/index.html';
+      } catch (error) {
+        console.error('error', error);
+        var errorMessageContainer = document.getElementById('error-message');
+        errorMessageContainer.innerText = 'Rossz adatokat adtál meg, kérlek próbáld újra.';
+      }
+    });

@@ -29,12 +29,28 @@ login.addEventListener("click", async (e) => {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
     
-        const result = await response.text();
+        const result = await response.json();
         console.log(result);
     
         if (result.userId !== null) {
+        const userId = result.userId;
+        const username = result.username;
+        const familyName = result.familyName;
+        const givenName = result.givenName;
+        const email = result.email;
+        const phone = result.phone;
+        const town = result.town;
+        const role = result.role;
         const token = result.token;
-        localStorage.setItem('Token', token);
+        localStorage.setItem('userId', userId);
+        localStorage.setItem('username', username);
+        localStorage.setItem('familyName', familyName);
+        localStorage.setItem('givenName', givenName);
+        localStorage.setItem('email', email);
+        localStorage.setItem('phone', phone);
+        localStorage.setItem('town', town);
+        localStorage.setItem('role', role);
+        localStorage.setItem('token', token);
         window.location.href = '/index.html';
         } else {
           errorMessageContainer.innerText = 'Rossz adatokat adtál meg, kérlek próbáld újra.';

@@ -32,9 +32,13 @@ login.addEventListener("click", async (e) => {
         const result = await response.text();
         console.log(result);
     
-        const Token = result;
-        localStorage.setItem('Token', Token);
+        if (result.userId !== null) {
+        const token = result.token;
+        localStorage.setItem('Token', token);
         window.location.href = '/index.html';
+        } else {
+          errorMessageContainer.innerText = 'Rossz adatokat adtál meg, kérlek próbáld újra.';
+        }
       } catch (error) {
         console.error('error', error);
         var errorMessageContainer = document.getElementById('error-message');

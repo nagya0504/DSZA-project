@@ -37,7 +37,7 @@
                     <a class="nav-link" href="login.html">Bejelentkezés</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="registration.html">Regisztráció</a>
+                    <a class="nav-link" href="favourites.html">Kedvencek</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="aboutus.html">Rólunk</a>
@@ -59,7 +59,6 @@
     <!-- Products -->
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Fetch data from the Java REST API
         fetch('http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/selectAllBooks', {
             method: 'GET',
             headers: {

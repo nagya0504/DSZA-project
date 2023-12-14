@@ -180,6 +180,17 @@ footer {
     display: block;
 }
 
+.btn-userdel {
+    color: red;
+    border-color: red;
+    margin: 30px auto;
+    background: white;
+}
+
+.btn-userdel:hover {
+    background-color: red;
+}
+
 /* # KEDVENCEK */
 
 .card {

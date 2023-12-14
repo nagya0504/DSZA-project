@@ -68,12 +68,11 @@
         })
         .then(response => response.json())
         .then(data => {
-            // Update the HTML content with the fetched data
             const productContainer = document.getElementById('productContainer');
+
             data.forEach(product => {
                 const cardColumn = document.createElement('div');
                 cardColumn.className = 'col-lg';
-
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
@@ -81,9 +80,13 @@
                     <div class="card-body">
                         <h5 class="card-title">${product.title}</h5>
                         <p class="card-text">${product.description}</p>
-                        <a href="editproduct.html" class="btn btn-product">Szerkesztés</a>
-                        <a class="btn btn-del btn-product">Törlés</a>
                     </div>`;
+                const viewButton = document.createElement('a');
+                viewButton.href = `product.html?id=${product.id}`;
+                viewButton.className = 'btn btn-product';
+                viewButton.textContent = 'Megnézem';
+
+                card.querySelector('.card-body').appendChild(viewButton);
                 productContainer.appendChild(card);
             });
         })

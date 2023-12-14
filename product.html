@@ -31,7 +31,7 @@
                   <a class="nav-link" href="profile.html">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Termékek</a>
+                    <a class="nav-link" href="index.html">Termékek</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="login.html">Bejelentkezés</a>
@@ -55,17 +55,137 @@
 
 <!-- # PRODUCT RÉSZ -->
 
-<div class="row product">
+<div id="productContainer">
+<!-- <div class="row product">
     <div class="col-lg-6">
-        <img class="product-img" src="img/card-img.png" alt="product képe">
+        <img id="productImage" class="product-img" src="img/card-img.png" alt="product képe">
     </div>
     <div class="col-lg-6 product-content">
-        <h1 class="h1"><b>Product</b></h1>
+        <h1 id="productTitle" class="h1"><b>Product</b></h1>
     
-        <h5 class="uploader"><b>Feltöltő neve</b></h5>
+        <h5 id="productAuthor" class="uploader"><b>Író neve</b></h5>
+        <h5 id="productPrice" class="product-price">asd</h5>
             
-        <p class="product-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam nulla accusamus harum a cum temporibus illo, veritatis excepturi placeat cupiditate doloribus necessitatibus saepe dolores libero magni dolor iure nihil molestiae.</p>
+        <p id="productDesc" class="product-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam nulla accusamus harum a cum temporibus illo, veritatis excepturi placeat cupiditate doloribus necessitatibus saepe dolores libero magni dolor iure nihil molestiae.</p>
     </div>
+</div> -->
+
+<script>
+    var productId;
+    
+    document.addEventListener("DOMContentLoaded", function () {
+    const productContainer = document.getElementById('productContainer');
+
+    const params = new URLSearchParams(window.location.search);
+    productId = params.get('id');
+
+    if (!productId) {
+        console.error('Product ID not found in the URL.');
+        return;
+    }
+
+    fetch('http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/selectAllBooks', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        const product = data.find(item => item.id == productId);
+
+        if (product) {
+            const productRow = document.createElement('div');
+            productRow.className = 'row product';
+
+            const imageColumn = document.createElement('div');
+            imageColumn.className = 'col-lg-6';
+
+            const productImage = document.createElement('img');
+            productImage.id = 'productImage';
+            productImage.className = 'product-img';
+            productImage.src = product.image;
+            productImage.alt = 'product képe';
+
+            imageColumn.appendChild(productImage);
+
+            const contentColumn = document.createElement('div');
+            contentColumn.className = 'col-lg-6 product-content';
+
+            var productTitle = document.createElement('h1');
+            productTitle.id = 'productTitle';
+            productTitle.className = 'h1';
+            productTitle.innerHTML = `<b>${product.title}</b>`;
+
+            var productAuthor = document.createElement('h5');
+            productAuthor.id = 'productAuthor';
+            productAuthor.className = 'uploader';
+            productAuthor.innerHTML = `<b>Író neve:</b> ${product.author}`;
+
+            var productPrice = document.createElement('h5');
+            productPrice.id = 'productPrice';
+            productPrice.className = 'product-price';
+            productPrice.textContent = `${product.price} Ft`;
+
+            var productDesc = document.createElement('p');
+            productDesc.id = 'productDesc';
+            productDesc.className = 'product-desc';
+            productDesc.textContent = product.description;
+
+            var addButton = document.createElement('a');
+            addButton.id = 'addFav';
+            addButton.className = 'btn btn-like';
+            addButton.textContent = 'Tetszik';
+
+            contentColumn.appendChild(productTitle);
+            contentColumn.appendChild(productAuthor);
+            contentColumn.appendChild(productPrice);
+            contentColumn.appendChild(productDesc);
+            contentColumn.appendChild(addButton);
+
+            productRow.appendChild(imageColumn);
+            productRow.appendChild(contentColumn);
+
+            productContainer.appendChild(productRow);
+            const addFav = document.getElementById("addFav");
+
+            // ! ADD FAV
+
+            addFav.addEventListener("click", async (e) => {
+            e.preventDefault();
+            
+            userId = localStorage.getItem("userId");
+            console.log(userId, productId);
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({
+            "userId": userId,
+            "productId": productId
+            });
+
+            var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+            };
+
+            fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/favourite/addFav", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+        })
+
+        } else {
+            console.error(`No product found with ID: ${productId}`);
+        }
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
+</script>
+
 </div>
 
 <!-- # FOOTER -->	
@@ -96,6 +216,8 @@
         </div>
     </div>
 </footer>
+
+<script src="js/addFav.js"></script>
 
 </body>
 </html>

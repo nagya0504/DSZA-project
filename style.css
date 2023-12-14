@@ -273,6 +273,10 @@ footer {
     margin-top: 40px;
 }
 
+.btn-like {
+    margin-bottom: 10px;
+}
+
 @media only screen and (max-width: 600px){
     .product-img {
         max-width: 200px;

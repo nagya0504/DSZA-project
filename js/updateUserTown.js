@@ -1,23 +1,7 @@
-const toggleButton = document.getElementById('toggleButton');
-const toggleDiv = document.getElementById('toggleDiv');
+var updatebtn = document.getElementById("updatetown");
 
-toggleButton.addEventListener('click', function() {
-  if (toggleDiv.style.display === 'none') {
-    toggleDiv.style.display = 'block';
-  } else {
-    toggleDiv.style.display = 'none';
-  }
-});
-
-
-function updateUserTownOnServer(userId, newTown) {
-    // Create an object with the data to be sent
-    const userData = {
-      id: userId,
-      town: newTown,
-    };
-  
-    fetch('http://your-java-backend/api/updateUserTown', {
+function updateTown(userData) {
+    fetch('http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/user/updateUserTown', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -28,24 +12,26 @@ function updateUserTownOnServer(userId, newTown) {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        return response.json();
+        return response;
       })
       .then(data => {
-        // Handle the response data here
-        console.log('User town updated:', data);
-        // You can perform further actions like updating the UI or redirecting the user.
+        console.log('Town changed:', data);
       })
       .catch(error => {
-        // Handle errors here, such as network issues or server errors
-        console.error('Error during user town update:', error);
-        // Display an error message to the user or perform error-specific actions.
+        console.error('Error:', error);
       });
   }
+
+document.getElementById('updatetown').addEventListener('submit', function (event) {
+    event.preventDefault();
   
-  // Example usage:
-  const userId = 123; // Replace with the user's ID
-  const newTown = 'NewTown'; // Replace with the new town name
+    const id = localStorage.getItem("userId");
+    const town = document.getElementById("town").value;
   
-  // Call the updateUserTownOnServer function with user data
-  updateUserTownOnServer(userId, newTown);
+    const userData = {
+      id: id,
+      town: town
+    };
   
+    updateTown(userData);
+  });

@@ -82,12 +82,14 @@
                 </div>
                 <a href="#toggleDivTown" id="toggleButtonTown" class="btn btn-product profilebtn">Város megváltoztatása</a>
                 <div id="toggleDivTown" class="toggleDiv">
-                    <input type="text" id="town" name="town">
-                    <br>
-                    <label for="town">Új város</label>
-                    <br>
-                    <input class="updatebtn btn" type="submit" value="Város megváltoztatása">
-                    <br>
+                    <form id="updatetown">
+                        <input type="text" id="town" name="town">
+                        <br>
+                        <label for="town">Új város</label>
+                        <br>
+                        <input id="townbtn" class="updatebtn btn" type="submit" value="Város megváltoztatása">
+                        <br>
+                    </form>
                 </div>
                 <a href="#toggleDivPhone" id="toggleButtonPhone" class="btn btn-product profilebtn">Telefonszám megváltoztatása</a>
                 <div id="toggleDivPhone" class="toggleDiv">
@@ -146,6 +148,7 @@
 
 <script src="js/deleteUser.js"></script>
 <script src="js/updateUserPhone.js"></script>
+<script src="js/updateUserTown.js"></script>
     
 </body>
 </html>

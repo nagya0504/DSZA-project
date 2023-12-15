@@ -79,6 +79,7 @@
             const productContainer = document.getElementById('productContainer');
 
             data.forEach(product => {
+            console.log(product);
                 const cardColumn = document.createElement('div');
                 cardColumn.className = 'col-lg';
                 const card = document.createElement('div');
@@ -86,11 +87,11 @@
                 card.innerHTML = `
                 <img src="${product.image}" class="card-img-top" alt="card image"/>
                     <div class="card-body">
-                        <h5 class="card-title">${product.title}</h5>
-                        <p class="card-text">${product.description}</p>
+                        <h5 class="card-title">${product[1]}</h5>
+                        <p class="card-text">${product[4]}</p>
                     </div>`;
                 const viewButton = document.createElement('a');
-                viewButton.href = `product.html?id=${product.id}`;
+                viewButton.href = `product.html?id=${product[0]}`;
                 viewButton.className = 'btn btn-product';
                 viewButton.textContent = 'Megnézem';
 
@@ -98,7 +99,7 @@
                 delbtn.id = 'delbtn';
                 delbtn.className  = 'btn btn-product';
                 delbtn.textContent = 'Mégsem tetszik';
-                delbtn.setAttribute('productId', product.id)
+                delbtn.setAttribute('productId', product[0])
 
                 card.querySelector('.card-body').appendChild(viewButton);
                 card.querySelector('.card-body').appendChild(delbtn);

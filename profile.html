@@ -61,12 +61,14 @@
             <div class="btn-group-vertical">
                 <a href="#toggleDivUsername" id="toggleButtonUsername" class="btn btn-product profilebtn">Felhasználónév megváltoztatása</a>
                 <div id="toggleDivUsername" class="toggleDiv">
-                    <input type="text" id="username" name="username">
-                    <br>
-                    <label for="username">Új felhasználónév</label>
-                    <br>
-                    <input class="updatebtn btn" type="submit" value="Felhasználónév megváltoztatása">
-                    <br>
+                    <form id="updateusername">
+                        <input type="text" id="username" name="username">
+                        <br>
+                        <label for="username">Új felhasználónév</label>
+                        <br>
+                        <input id="usernamebtn" class="updatebtn btn" type="submit" value="Felhasználónév megváltoztatása">
+                        <br>
+                    </form>
                 </div>
                 <a href="#toggleDivPassword" id="toggleButtonPassword" class="btn btn-product profilebtn">Jelszó megváltoztatása</a>
                 <div id="toggleDivPassword" class="toggleDiv">
@@ -149,6 +151,7 @@
 <script src="js/deleteUser.js"></script>
 <script src="js/updateUserPhone.js"></script>
 <script src="js/updateUserTown.js"></script>
+<script src="js/updateUserUsername.js"></script>
     
 </body>
 </html>

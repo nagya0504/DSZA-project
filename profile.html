@@ -91,12 +91,14 @@
                 </div>
                 <a href="#toggleDivPhone" id="toggleButtonPhone" class="btn btn-product profilebtn">Telefonszám megváltoztatása</a>
                 <div id="toggleDivPhone" class="toggleDiv">
-                    <input type="text" id="phone" name="phone">
-                    <br>
-                    <label for="phone">Új telefonszám</label>
-                    <br>
-                    <input class="updatebtn btn" type="submit" value="Telefonszám megváltoztatása">
-                    <br>
+                    <form id="updatephone">
+                        <input type="text" id="phone" name="phone">
+                        <br>
+                        <label for="phone">Új telefonszám</label>
+                        <br>
+                        <input id="phonebtn" class="updatebtn btn" type="submit" value="Telefonszám megváltoztatása">
+                        <br>
+                    </form>
                 </div>
             </div>
         </div>
@@ -143,6 +145,7 @@
 </footer>
 
 <script src="js/deleteUser.js"></script>
+<script src="js/updateUserPhone.js"></script>
     
 </body>
 </html>

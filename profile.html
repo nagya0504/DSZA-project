@@ -72,15 +72,18 @@
                 </div>
                 <a href="#toggleDivPassword" id="toggleButtonPassword" class="btn btn-product profilebtn">Jelszó megváltoztatása</a>
                 <div id="toggleDivPassword" class="toggleDiv">
-                    <input type="password" id="pwd" name="pwd">
-                    <br>
-                    <label for="pwd">Új jelszó</label>
-                    <br>
-                    <input type="password" id="pwd2" name="pwd2">
-                    <br>
-                    <label for="pwd2">Jelszó mégegyszer</label>
-                    <br>
-                    <input class="updatebtn btn" type="submit" value="Jelszó megváltoztatása">
+                    <form id="updatepwd">
+                        <input type="password" id="pwd" name="pwd">
+                        <br>
+                        <label for="pwd">Új jelszó</label>
+                        <br>
+                        <input type="password" id="pwd2" name="pwd2">
+                        <br>
+                        <label for="pwd2">Jelszó mégegyszer</label>
+                        <br>
+                        <input id="updatepwdbtn" class="updatebtn btn" type="submit" value="Jelszó megváltoztatása">
+                    </form>
+                    <div id="error-message"></div>
                 </div>
                 <a href="#toggleDivTown" id="toggleButtonTown" class="btn btn-product profilebtn">Város megváltoztatása</a>
                 <div id="toggleDivTown" class="toggleDiv">
@@ -152,6 +155,7 @@
 <script src="js/updateUserPhone.js"></script>
 <script src="js/updateUserTown.js"></script>
 <script src="js/updateUserUsername.js"></script>
+<script src="js/updateUserPwd.js"></script>
     
 </body>
 </html>

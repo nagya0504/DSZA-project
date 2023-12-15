@@ -7,7 +7,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addBook`(IN `user_id` INT, IN `title` VARCHAR(100), IN `author` VARCHAR(100), IN `price` INT, IN `description` TEXT, IN `img` VARCHAR(100))
 INSERT INTO `product`
-VALUES(NULL, user_id, title, author, price, description, img, 1, NOW())$$
+VALUES(NULL, user_id, title, author, price, description, img, 1, NOW(), NULL)$$
 DELIMITER ;
 
 DELIMITER $$
@@ -19,8 +19,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addUser`(IN `username` VARCHAR(50), IN `familyName` VARCHAR(100), IN `givenName` VARCHAR(100), IN `email` VARCHAR(50), IN `pwd` VARCHAR(50), IN `phone` VARCHAR(15), IN `town` VARCHAR(100))
 INSERT INTO `user`
-VALUES(NULL, username, familyName, givenName, email, SHA2(pwd, 256), phone, town, 2, NOW(), NOW(), NULL)
--- regisztráció$$
+VALUES(NULL, username, familyName, givenName, email, SHA2(pwd, 256), phone, town, 2, NOW(), NOW(), NULL)$$
 DELIMITER ;
 
 DELIMITER $$
@@ -38,6 +37,20 @@ DELIMITER ;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteUser`(IN `id` INT)
 DELETE FROM `user` WHERE `user`.`id` = id$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `logDeleteBook`(IN `id` INT)
+UPDATE `product`
+SET `product`.`status_id` = 4, `product`.`deleted_at` = NOW()
+WHERE `product`.`id` = id$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `logDeleteUser`(IN `id` INT)
+UPDATE `user`
+SET `user`.`deleted_at` = NOW()
+WHERE `user`.`id` = id$$
 DELIMITER ;
 
 DELIMITER $$
@@ -88,13 +101,32 @@ SELECT * FROM `product`$$
 DELIMITER ;
 
 DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `selectAllFav`(IN `userId` INT)
+SELECT `favourites`.`product_id`, `product`.`title`, `product`.`author`, `product`.`price`, `product`.`description`, `product`.`image`
+FROM `favourites`
+RIGHT JOIN `product` ON `product`.`id` = `favourites`.`product_id`
+WHERE `favourites`.`user_id` = userId$$
+DELIMITER ;
+
+DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `selectAllUser`()
 SELECT * from `user` WHERE `user`.`role_id` = 2$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `selectProduct`(IN `id` INT)
-SELECT * FROM `product` WHERE `product`.`id` = id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `selectProduct`(IN `id` INT, OUT `idOUT` INT, OUT `userId` INT, OUT `title` VARCHAR(100), OUT `author` VARCHAR(100), OUT `price` INT, OUT `description` TEXT, OUT `img` VARCHAR(100))
+SELECT `product`.`id`, `product`.`user_id`, `product`.`title`, `product`.`author`, `product`.`price`, `product`.`description`, `product`.`image` 
+INTO idOUT, userId, title, author, price, description, img
+FROM `product` 
+WHERE `product`.`id` = id$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `selectUserByEmail`(IN `email` VARCHAR(50), IN `pwd` VARCHAR(100), OUT `id` INT, OUT `username` VARCHAR(50), OUT `familyName` VARCHAR(100), OUT `givenName` VARCHAR(100), OUT `emailOUT` VARCHAR(50), OUT `phone` VARCHAR(15), OUT `town` VARCHAR(100), OUT `role` INT)
+SELECT `user`.`id`, `user`.`username`, `user`.`family_name`, `user`.`given_name`, `user`.`email`, `user`.`phone`, `user`.`town`, `user`.`role_id`
+INTO id, username, familyName, givenName, emailOUT, phone, town, role
+FROM `user` 
+WHERE `user`.`email` = email AND `user`.`pwd` = SHA2(pwd, 256)$$
 DELIMITER ;
 
 DELIMITER $$
@@ -142,7 +174,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUserPassword`(IN `id` INT, IN `newPwd` VARCHAR(50))
 UPDATE `user`
-SET `user`.`pwd` = newPwd
+SET `user`.`pwd` = SHA2(newPwd, 256)
 WHERE `user`.`id` = id$$
 DELIMITER ;
 
@@ -150,7 +182,7 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUserPhone`(IN `id` INT, IN `newPhone` VARCHAR(15))
 UPDATE `user`
 SET `user`.`phone` = newPhone
-WHERE `user`.`id` = idIN$$
+WHERE `user`.`id` = id$$
 DELIMITER ;
 
 DELIMITER $$

@@ -138,6 +138,15 @@ footer {
     background-color: #fff;
 }
 
+.dropdown-toggle {
+    margin: 5px;
+    background-color: #5f4334;
+    border: #F2B490;
+    color: #F2B490;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+}
+
 /* # PROFIL */
 
 .profilebtn {

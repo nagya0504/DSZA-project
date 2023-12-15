@@ -42,12 +42,16 @@
                 <li class="nav-item">
                     <a class="nav-link" href="aboutus.html">Rólunk</a>
                 </li>
-                <form class="d-flex input-group w-auto">
-                    <input type="search" class="kereses form-control rounded" placeholder="Keresés" aria-label="Search" aria-describedby="search-addon"/>
-                    <span class="input-group-text border-0 search-btn" id="search-addon">
-                        <img class="search-btn-img" src="img/search.png" alt="Keresés gomb">
-                    </span>
-                </form>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      Rendezés
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <li><a id="azbtn" class="dropdown-item">Rendezés A-tól Z-ig</a></li>
+                      <li><a class="dropdown-item">Legolcsóbb elöl</a></li>
+                      <li><a class="dropdown-item">Legdrágább elöl</a></li>
+                    </ul>
+                  </div>
             </ul>
         </div>
       </div>
@@ -58,40 +62,78 @@
 <div class="container" id="productContainer">
     <!-- Products -->
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        fetch('http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/selectAllBooks', {
+        document.addEventListener("DOMContentLoaded", function () {
+          const productContainer = document.getElementById('productContainer');
+      
+          fetch(`http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/selectAllBooks`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
+              'Content-Type': 'application/json',
             },
-        })
-        .then(response => response.json())
-        .then(data => {
-            const productContainer = document.getElementById('productContainer');
-
+          })
+          .then(response => response.json())
+          .then(data => {
             data.forEach(product => {
-                const cardColumn = document.createElement('div');
-                cardColumn.className = 'col-lg';
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
+              const cardColumn = document.createElement('div');
+              cardColumn.className = 'col-lg';
+              const card = document.createElement('div');
+              card.className = 'card';
+              card.innerHTML = `
                 <img src="${product.image}" class="card-img-top" alt="card image"/>
+                <div class="card-body">
+                  <h5 class="card-title">${product.title}</h5>
+                  <p class="card-text">${product.description}</p>
+                </div>`;
+              const viewButton = document.createElement('a');
+              viewButton.href = `product.html?id=${product.id}`;
+              viewButton.className = 'btn btn-product';
+              viewButton.textContent = 'Megnézem';
+      
+              card.querySelector('.card-body').appendChild(viewButton);
+              productContainer.appendChild(card);
+            });
+          })
+          .catch(error => console.error('Error fetching data:', error));
+      
+          const azButton = document.getElementById('azbtn');
+      
+          azButton.addEventListener('click', function () {
+            productContainer.innerHTML = '';
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            var requestOptions = {
+                method: 'GET',
+                headers: myHeaders,
+                redirect: 'follow'
+            };
+            fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/orderBooksAZ", requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                data.forEach(product => {
+                    const cardColumn = document.createElement('div');
+                    cardColumn.className = 'col-lg';
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                    <img src="${product.image}" class="card-img-top" alt="card image"/>
                     <div class="card-body">
                         <h5 class="card-title">${product.title}</h5>
                         <p class="card-text">${product.description}</p>
                     </div>`;
-                const viewButton = document.createElement('a');
-                viewButton.href = `product.html?id=${product.id}`;
-                viewButton.className = 'btn btn-product';
-                viewButton.textContent = 'Megnézem';
+                    const viewButton = document.createElement('a');
+                    viewButton.href = `product.html?id=${product.id}`;
+                    viewButton.className = 'btn btn-product';
+                    viewButton.textContent = 'Megnézem';
 
-                card.querySelector('.card-body').appendChild(viewButton);
-                productContainer.appendChild(card);
-            });
-        })
-        .catch(error => console.error('Error fetching data:', error));
-    });
-    </script>
+                    card.querySelector('.card-body').appendChild(viewButton);
+                    productContainer.appendChild(card);
+                });
+            })
+            .catch(error => console.log('error', error));
+        });
+        });
+      </script>
 </div>
 
 <!-- # FOOTER -->	

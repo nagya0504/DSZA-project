@@ -58,13 +58,22 @@
 <div class="container" id="productContainer">
     <!-- Products -->
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        fetch('http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/selectAllBooks', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var userId = localStorage.getItem("userId");
+
+    var raw = JSON.stringify({
+    "userId": userId
+    });
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+    };
+
+    fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/favourite/selectAllFav", requestOptions)
         .then(response => response.json())
         .then(data => {
             const productContainer = document.getElementById('productContainer');
@@ -100,7 +109,6 @@
                 delbtn.addEventListener("click", async (e) => {
                 e.preventDefault();
                 
-                userId = localStorage.getItem("userId");
                 const productId = delbtn.getAttribute("productId");
                 console.log(userId, productId);
 
@@ -127,7 +135,6 @@
             });
         })
         .catch(error => console.error('Error fetching data:', error));
-    });
     </script>
 </div>
 
@@ -160,7 +167,6 @@
     </div>
 </footer>
 
-<script src="js/deleteFav.js"></script>
 
 </body>
 </html>

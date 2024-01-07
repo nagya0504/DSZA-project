@@ -56,6 +56,7 @@
 <!-- # KEDVENCEK CARDOK -->	
 
 <div class="container" id="productContainer">
+    <div class="row-cols-lg-4">
     <!-- Products -->
     <script>
     var myHeaders = new Headers();
@@ -79,7 +80,7 @@
             const productContainer = document.getElementById('productContainer');
 
             data.forEach(product => {
-            console.log(product);
+            // console.log(product);
                 const cardColumn = document.createElement('div');
                 cardColumn.className = 'col-lg';
                 const card = document.createElement('div');
@@ -87,11 +88,11 @@
                 card.innerHTML = `
                 <img src="${product.image}" class="card-img-top" alt="card image"/>
                     <div class="card-body">
-                        <h5 class="card-title">${product[1]}</h5>
-                        <p class="card-text">${product[4]}</p>
+                        <h5 class="card-title">${product[2]}</h5>
+                        <p class="card-text">${product[5]}</p>
                     </div>`;
                 const viewButton = document.createElement('a');
-                viewButton.href = `product.html?id=${product[0]}`;
+                viewButton.href = `product.html?id=${product[1]}`;
                 viewButton.className = 'btn btn-product';
                 viewButton.textContent = 'Megnézem';
 
@@ -99,7 +100,7 @@
                 delbtn.id = 'delbtn';
                 delbtn.className  = 'btn btn-product';
                 delbtn.textContent = 'Mégsem tetszik';
-                delbtn.setAttribute('productId', product[0])
+                delbtn.setAttribute('productId', product[1])
 
                 card.querySelector('.card-body').appendChild(viewButton);
                 card.querySelector('.card-body').appendChild(delbtn);
@@ -108,35 +109,39 @@
                 // DELETE FAV
 
                 delbtn.addEventListener("click", async (e) => {
-                e.preventDefault();
-                
-                const productId = delbtn.getAttribute("productId");
-                console.log(userId, productId);
+                        e.preventDefault();
+                        
+                        const productId = delbtn.getAttribute("productId");
+                        // console.log(userId, productId);
 
-                var myHeaders = new Headers();
-                myHeaders.append("Content-Type", "application/json");
+                        var myHeaders = new Headers();
+                        myHeaders.append("Content-Type", "application/json");
 
-                var raw = JSON.stringify({
-                "userId": userId,
-                "productId": productId
+                        var raw = JSON.stringify({
+                            "userId": userId,
+                            "productId": productId
+                        });
+
+                        var requestOptions = {
+                            method: 'PUT',
+                            headers: myHeaders,
+                            body: raw,
+                            redirect: 'follow'
+                        };
+
+                        fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/favourite/deleteFav", requestOptions)
+                            .then(response => response.text())
+                            .then(result => {
+                                // console.log(result);
+                                window.location.reload();
+                            })
+                            .catch(error => console.log('error', error));
+                    })
                 });
-
-                var requestOptions = {
-                method: 'PUT',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-                };
-
-                fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/favourite/deleteFav", requestOptions)
-                .then(response => response.text())
-                .then(result => console.log(result))
-                .catch(error => console.log('error', error));
-            })
-            });
         })
         .catch(error => console.error('Error fetching data:', error));
     </script>
+    </div>
 </div>
 
 <!-- # FOOTER -->	

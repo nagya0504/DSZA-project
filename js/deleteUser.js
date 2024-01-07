@@ -3,7 +3,7 @@ const delbtn = document.getElementById("delbtn");
 delbtn.addEventListener("click", async (e) => {
     e.preventDefault();
     var userId = localStorage.getItem("userId");
-    console.log(userId);
+    // console.log(userId);
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");

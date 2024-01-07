@@ -5,9 +5,9 @@ VALUES(NULL, username, familyName, givenName, email, SHA2(pwd, 256), phone, town
 DELIMITER ;
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `addBook`(IN `user_id` INT, IN `title` VARCHAR(100), IN `author` VARCHAR(100), IN `price` INT, IN `description` TEXT, IN `img` VARCHAR(100))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addBook`(IN `user_id` INT, IN `title` VARCHAR(100), IN `author` VARCHAR(100), IN `price` INT, IN `description` TEXT, IN `image` VARCHAR(100))
 INSERT INTO `product`
-VALUES(NULL, user_id, title, author, price, description, img, 1, NOW(), NULL)$$
+VALUES(NULL, user_id, title, author, price, description, image, 1, NOW(), NULL)$$
 DELIMITER ;
 
 DELIMITER $$
@@ -102,7 +102,7 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `selectAllFav`(IN `userId` INT)
-SELECT `favourites`.`product_id`, `product`.`title`, `product`.`author`, `product`.`price`, `product`.`description`, `product`.`image`
+SELECT `favourites`.`id`, `favourites`.`product_id`, `product`.`title`, `product`.`author`, `product`.`price`, `product`.`description`, `product`.`image`
 FROM `favourites`
 RIGHT JOIN `product` ON `product`.`id` = `favourites`.`product_id`
 WHERE `favourites`.`user_id` = userId$$

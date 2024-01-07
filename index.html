@@ -73,9 +73,13 @@
           })
             .then(response => response.json())
             .then(data => {
-              data.forEach(product => {
+              data.forEach((product, id) => {
+                if (id % 3 === 0) {
+                  currentRow = document.createElement('div');
+                  currentRow.className = 'row';
+                }
                 const cardColumn = document.createElement('div');
-                cardColumn.className = 'col-lg';
+                cardColumn.className = 'col-lg-4';
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
@@ -83,6 +87,7 @@
                   <div class="card-body">
                     <h5 class="card-title">${product.title}</h5>
                     <p class="card-text">${product.description}</p>
+                    <p class="card-text">${product.price} Ft</p>
                   </div>`;
                 const viewButton = document.createElement('a');
                 viewButton.href = `product.html?id=${product.id}`;
@@ -91,7 +96,11 @@
       
                 card.querySelector('.card-body').appendChild(viewButton);
                 cardColumn.appendChild(card);
-                productContainer.appendChild(cardColumn);
+                currentRow.appendChild(cardColumn);
+
+                if (id % 3 === 0) {
+                  productContainer.appendChild(currentRow);
+                }
               });
             })
             .catch(error => console.error('Error fetching data:', error));
@@ -113,9 +122,13 @@
             fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/orderBooksAZ", requestOptions)
               .then(response => response.json())
               .then(data => {
-                data.forEach(product => {
+                data.forEach((product, id) => {
+                if (id % 3 === 0) {
+                  currentRow = document.createElement('div');
+                  currentRow.className = 'row';
+                }
                   const cardColumn = document.createElement('div');
-                  cardColumn.className = 'col-lg';
+                  cardColumn.className = 'col-lg-4';
                   const card = document.createElement('div');
                   card.className = 'card';
                   card.innerHTML = `
@@ -123,6 +136,7 @@
                     <div class="card-body">
                       <h5 class="card-title">${product.title}</h5>
                       <p class="card-text">${product.description}</p>
+                      <p class="card-text">${product.price} Ft</p>
                     </div>`;
                   const viewButton = document.createElement('a');
                   viewButton.href = `product.html?id=${product.id}`;
@@ -132,6 +146,11 @@
                   card.querySelector('.card-body').appendChild(viewButton);
                   cardColumn.appendChild(card);
                   productContainer.appendChild(cardColumn);
+                  currentRow.appendChild(cardColumn);
+
+                  if (id % 3 === 0) {
+                    productContainer.appendChild(currentRow);
+                  }
                 });
               })
               .catch(error => console.log('error', error));
@@ -154,9 +173,13 @@
             fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/orderBooksAsc", requestOptions)
               .then(response => response.json())
               .then(data => {
-                data.forEach(product => {
+                data.forEach((product, id) => {
+                if (id % 3 === 0) {
+                  currentRow = document.createElement('div');
+                  currentRow.className = 'row';
+                }
                   const cardColumn = document.createElement('div');
-                  cardColumn.className = 'col-lg';
+                  cardColumn.className = 'col-lg-4';
                   const card = document.createElement('div');
                   card.className = 'card';
                   card.innerHTML = `
@@ -164,6 +187,7 @@
                     <div class="card-body">
                       <h5 class="card-title">${product.title}</h5>
                       <p class="card-text">${product.description}</p>
+                      <p class="card-text">${product.price} Ft</p>
                     </div>`;
                   const viewButton = document.createElement('a');
                   viewButton.href = `product.html?id=${product.id}`;
@@ -173,6 +197,11 @@
                   card.querySelector('.card-body').appendChild(viewButton);
                   cardColumn.appendChild(card);
                   productContainer.appendChild(cardColumn);
+                  currentRow.appendChild(cardColumn);
+
+                  if (id % 3 === 0) {
+                    productContainer.appendChild(currentRow);
+                  }
                 });
               })
               .catch(error => console.log('error', error));
@@ -195,9 +224,13 @@
             fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/orderBooksDesc", requestOptions)
               .then(response => response.json())
               .then(data => {
-                data.forEach(product => {
+                data.forEach((product, id) => {
+                if (id % 3 === 0) {
+                  currentRow = document.createElement('div');
+                  currentRow.className = 'row';
+                }
                   const cardColumn = document.createElement('div');
-                  cardColumn.className = 'col-lg';
+                  cardColumn.className = 'col-lg-4';
                   const card = document.createElement('div');
                   card.className = 'card';
                   card.innerHTML = `
@@ -205,6 +238,7 @@
                     <div class="card-body">
                       <h5 class="card-title">${product.title}</h5>
                       <p class="card-text">${product.description}</p>
+                      <p class="card-text">${product.price} Ft</p>
                     </div>`;
                   const viewButton = document.createElement('a');
                   viewButton.href = `product.html?id=${product.id}`;
@@ -214,6 +248,11 @@
                   card.querySelector('.card-body').appendChild(viewButton);
                   cardColumn.appendChild(card);
                   productContainer.appendChild(cardColumn);
+                  currentRow.appendChild(cardColumn);
+
+                  if (id % 3 === 0) {
+                    productContainer.appendChild(currentRow);
+                  }
                 });
               })
               .catch(error => console.log('error', error));

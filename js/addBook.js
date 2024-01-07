@@ -12,7 +12,7 @@ function addBook(bookData) {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        console.log('Request Headers:', myHeaders);
+        // console.log('Request Headers:', myHeaders);
         console.log('Request Payload:', JSON.stringify(bookData));
 
         return response.json();
@@ -42,7 +42,7 @@ function addBook(bookData) {
       author: author,
       price: parseInt(price),
       description: desc,
-      img: "kép"
+      image: "kép"
     };
   
     addBook(bookData);

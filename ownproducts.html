@@ -65,7 +65,7 @@
                     const card = document.createElement('div');
                     card.className = 'card';
                     card.innerHTML = `
-                    <img src="${product.image}" class="card-img-top" alt="card image"/>
+                    <img src="${product.image}" class="card-img-top small-product-img" alt="card image"/>
                         <div class="card-body">
                             <h5 class="card-title">${product.title}</h5>
                             <p class="card-text">${product.description}</p>
@@ -109,7 +109,10 @@
 
                     fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/logDeleteBook", requestOptions)
                     .then(response => response.text())
-                    .then(result => console.log(result))
+                    .then(result => {
+                                // console.log(result);
+                                window.location.reload();
+                            })
                     .catch(error => console.log('error', error));
                 })
             .catch(error => console.error('Error fetching data:', error));

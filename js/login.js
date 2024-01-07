@@ -6,7 +6,7 @@ login.addEventListener("click", async (e) => {
   var email = document.getElementById("email");
   var pwd = document.getElementById("pwd");
 
-  console.log(email.value + pwd.value + "asd");
+  // console.log(email.value + pwd.value + "asd");
 
       const postData = JSON.stringify({
           "email": email.value,
@@ -30,7 +30,7 @@ login.addEventListener("click", async (e) => {
         }
     
         const result = await response.json();
-        console.log(result);
+        // console.log(result);
     
         if (result.userId !== null) {
         const userId = result.userId;

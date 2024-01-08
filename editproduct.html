@@ -115,6 +115,8 @@
                         productDesc.id = 'productDesc';
                         productDesc.className = 'product-desc';
                         productDesc.textContent = product.description;
+
+                        var br = document.createElement('br');
     
                         // új cím
     
@@ -122,6 +124,7 @@
                         newTitle.id = 'newTitle';
                         newTitle.name = 'newTitle';
                         newTitle.type = 'text';
+                        newTitle.placeholder = 'Új cím';
     
                         var sNewTitle = document.createElement('a');
                         sNewTitle.id = 'sNewTitle';
@@ -134,11 +137,25 @@
                         newAuthor.id = 'newAuthor';
                         newAuthor.name = 'newAuthor';
                         newAuthor.type = 'text';
+                        newAuthor.placeholder = 'Új író';
     
                         var sNewAuthor = document.createElement('a');
                         sNewAuthor.id = 'sNewAuthor';
                         sNewAuthor.className = 'btn btn-like';
                         sNewAuthor.textContent = 'Módosítás';
+                        
+                        // új ár
+    
+                        var newPrice = document.createElement('input');
+                        newPrice.id = 'newPrice';
+                        newPrice.name = 'newPrice';
+                        newPrice.type = 'text';
+                        newPrice.placeholder = 'Új ár';
+    
+                        var sNewPrice = document.createElement('a');
+                        sNewPrice.id = 'sNewPrice';
+                        sNewPrice.className = 'btn btn-like';
+                        sNewPrice.textContent = 'Módosítás';
     
                         contentColumn.appendChild(productTitle);
                         contentColumn.appendChild(productAuthor);
@@ -146,8 +163,12 @@
                         contentColumn.appendChild(productDesc);
                         contentColumn.appendChild(newTitle);
                         contentColumn.appendChild(sNewTitle);
+                        contentColumn.appendChild(br);
                         contentColumn.appendChild(newAuthor);
                         contentColumn.appendChild(sNewAuthor);
+                        contentColumn.appendChild(br);
+                        contentColumn.appendChild(newPrice);
+                        contentColumn.appendChild(sNewPrice);
     
                         productRow.appendChild(imageColumn);
                         productRow.appendChild(contentColumn);
@@ -211,6 +232,39 @@
                             };
     
                             fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/updateBookAuthor", requestOptions)
+                                .then(response => response.text())
+                                .then(result => {
+                                    console.log(result);
+                                    window.location.reload();
+                                })
+                                .catch(error => console.log('error', error));
+                        });
+
+                        // ! NEW PRICE
+    
+                        const pricesubmit = document.getElementById("sNewPrice");
+    
+                        pricesubmit.addEventListener("click", async (e) => {
+                            e.preventDefault();
+    
+                            var newPrice = document.getElementById("newPrice").value;
+    
+                            var myHeaders = new Headers();
+                            myHeaders.append("Content-Type", "application/json");
+    
+                            var raw = JSON.stringify({
+                                "id": productId,
+                                "price": newPrice
+                            });
+    
+                            var requestOptions = {
+                                method: 'POST',
+                                headers: myHeaders,
+                                body: raw,
+                                redirect: 'follow'
+                            };
+    
+                            fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/updateBookPrice", requestOptions)
                                 .then(response => response.text())
                                 .then(result => {
                                     console.log(result);

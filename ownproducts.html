@@ -57,67 +57,78 @@
 
 <div class="container" id="productContainer">
     <script>
-    const productContainer = document.getElementById('productContainer');
-
-                data.forEach(product => {
-                    const cardColumn = document.createElement('div');
-                    cardColumn.className = 'col-lg';
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    card.innerHTML = `
-                    <img src="${product.image}" class="card-img-top small-product-img" alt="card image"/>
-                        <div class="card-body">
-                            <h5 class="card-title">${product.title}</h5>
-                            <p class="card-text">${product.description}</p>
-                        </div>`;
-                    const viewButton = document.createElement('a');
-                    viewButton.href = `product.html?id=${product.id}`;
-                    viewButton.className = 'btn btn-product';
-                    viewButton.textContent = 'Megnézem';
-
-                    const delbtn = document.createElement('a');
-                    delbtn.id = 'delbtn';
-                    delbtn.className  = 'btn btn-del';
-                    delbtn.textContent = 'Törlés';
-                    delbtn.setAttribute('productId', product.id)
-
-                    card.querySelector('.card-body').appendChild(viewButton);
-                    card.querySelector('.card-body').appendChild(delbtn);
-                    productContainer.appendChild(card);
-
-                    // DELETE FAV
-
-                    delbtn.addEventListener("click", async (e) => {
-                    e.preventDefault();
-                    
-                    const productId = delbtn.getAttribute("productId");
-                    // console.log(userId, productId);
-
-                    var myHeaders = new Headers();
-                    myHeaders.append("Content-Type", "application/json");
-
-                    var raw = JSON.stringify({
-                    "id": productId
+        document.addEventListener("DOMContentLoaded", function () {
+            const productContainer = document.getElementById('productContainer');
+            var userId = localStorage.getItem('userId');
+    
+            fetch(`http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/selectAllBooks`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(product => {
+                        if (product.userId == userId) {
+                            const cardColumn = document.createElement('div');
+                            cardColumn.className = 'col-lg';
+                            const card = document.createElement('div');
+                            card.className = 'card';
+                            card.innerHTML = `
+                                <img src="${product.image}" class="card-img-top small-product-img" alt="card image"/>
+                                <div class="card-body">
+                                    <h5 class="card-title">${product.title}</h5>
+                                    <p class="card-text">${product.description}</p>
+                                </div>`;
+                            const viewButton = document.createElement('a');
+                            viewButton.href = `product.html?id=${product.id}`;
+                            viewButton.className = 'btn btn-product';
+                            viewButton.textContent = 'Megnézem';
+    
+                            const delbtn = document.createElement('a');
+                            delbtn.id = 'delbtn';
+                            delbtn.className = 'btn btn-del';
+                            delbtn.textContent = 'Törlés';
+                            delbtn.setAttribute('productId', product.id)
+    
+                            card.querySelector('.card-body').appendChild(viewButton);
+                            card.querySelector('.card-body').appendChild(delbtn);
+                            productContainer.appendChild(card);
+    
+                            // DELETE FAV
+                            delbtn.addEventListener("click", async (e) => {
+                                e.preventDefault();
+    
+                                const productId = delbtn.getAttribute("productId");
+                                var myHeaders = new Headers();
+                                myHeaders.append("Content-Type", "application/json");
+    
+                                var raw = JSON.stringify({
+                                    "id": productId
+                                });
+    
+                                var requestOptions = {
+                                    method: 'POST',
+                                    headers: myHeaders,
+                                    body: raw,
+                                    redirect: 'follow'
+                                };
+    
+                                fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/logDeleteBook", requestOptions)
+                                    .then(response => response.text())
+                                    .then(result => {
+                                        window.location.reload();
+                                    })
+                                    .catch(error => console.log('error', error));
+                            });
+                        }
                     });
-
-                    var requestOptions = {
-                    method: 'POST',
-                    headers: myHeaders,
-                    body: raw,
-                    redirect: 'follow'
-                    };
-
-                    fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/logDeleteBook", requestOptions)
-                    .then(response => response.text())
-                    .then(result => {
-                                // console.log(result);
-                                window.location.reload();
-                            })
-                    .catch(error => console.log('error', error));
                 })
-            .catch(error => console.error('Error fetching data:', error));
-            });
+                .catch(error => console.log('error', error));
+        });
     </script>
+    
 </div>
 
 <!-- # FOOTER -->	
@@ -148,8 +159,6 @@
         </div>
     </div>
 </footer>
-
-<script src="js/updateUserTown.js"></script>
     
 </body>
 </html>

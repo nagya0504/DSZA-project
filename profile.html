@@ -112,7 +112,17 @@
         <div class="col-lg profilecol">
             <div class="felhasznalo">
             <p><strong>Bejelentkezve:</strong></p>
-            <p>Példa felhasználó</p>
+            <div id="nameDiv">
+            <script>
+                const nameDiv = document.getElementById('nameDiv');
+                var familyName = localStorage.getItem('familyName');
+                var givenName = localStorage.getItem("givenName");
+                var fullName = document.createElement('p');
+                
+                fullName.innerHTML = `${familyName} ${givenName}`;
+                nameDiv.appendChild(fullName);
+            </script>
+            </div>
             <a id="delbtn" class="btn btn-userdel btn-product">Felhasználó törlése</a>
             <a href="newbook.html" class="btn btn-product profilebtn">Új könyv feltöltése</a>
             <a href="favourites.html" class="btn btn-product profilebtn">Kedvencek</a>

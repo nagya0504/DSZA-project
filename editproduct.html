@@ -156,6 +156,19 @@
                         sNewPrice.id = 'sNewPrice';
                         sNewPrice.className = 'btn btn-like';
                         sNewPrice.textContent = 'Módosítás';
+
+                        
+                        // új leírás
+    
+                        var newDescription = document.createElement('textarea');
+                        newDescription.id = 'newDescription';
+                        newDescription.name = 'newDescription';
+                        newDescription.placeholder = 'Új leírás';
+    
+                        var sNewDescription = document.createElement('a');
+                        sNewDescription.id = 'sNewDescription';
+                        sNewDescription.className = 'btn btn-like';
+                        sNewDescription.textContent = 'Módosítás';
     
                         contentColumn.appendChild(productTitle);
                         contentColumn.appendChild(productAuthor);
@@ -169,6 +182,9 @@
                         contentColumn.appendChild(br);
                         contentColumn.appendChild(newPrice);
                         contentColumn.appendChild(sNewPrice);
+                        contentColumn.appendChild(br);
+                        contentColumn.appendChild(newDescription);
+                        contentColumn.appendChild(sNewDescription);
     
                         productRow.appendChild(imageColumn);
                         productRow.appendChild(contentColumn);
@@ -272,6 +288,40 @@
                                 })
                                 .catch(error => console.log('error', error));
                         });
+
+                        // ! NEW DESCRIPTION
+    
+                        const descsubmit = document.getElementById("sNewDescription");
+    
+                        descsubmit.addEventListener("click", async (e) => {
+                            e.preventDefault();
+    
+                            var newDescription = document.getElementById("newDescription").value;
+    
+                            var myHeaders = new Headers();
+                            myHeaders.append("Content-Type", "application/json");
+    
+                            var raw = JSON.stringify({
+                                "id": productId,
+                                "description": newDescription
+                            });
+    
+                            var requestOptions = {
+                                method: 'POST',
+                                headers: myHeaders,
+                                body: raw,
+                                redirect: 'follow'
+                            };
+    
+                            fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/updateBookDesc", requestOptions)
+                                .then(response => response.text())
+                                .then(result => {
+                                    console.log(result);
+                                    window.location.reload();
+                                })
+                                .catch(error => console.log('error', error));
+                        });
+
                     } else {
                         console.error(`No product found with ID: ${productId}`);
                     }

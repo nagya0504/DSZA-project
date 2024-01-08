@@ -56,127 +56,175 @@
 <div id="productContainer" class="product">
     <script>
         var productId;
-        
+    
         document.addEventListener("DOMContentLoaded", function () {
-        const productContainer = document.getElementById('productContainer');
+            const productContainer = document.getElementById('productContainer');
     
-        const params = new URLSearchParams(window.location.search);
-        productId = params.get('id');
+            const params = new URLSearchParams(window.location.search);
+            productId = params.get('id');
     
-        if (!productId) {
-            console.error('Product ID not found in the URL.');
-            return;
-        }
-    
-        fetch('http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/selectAllBooks', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            const product = data.find(item => item.id == productId);
-    
-            if (product) {
-                const productRow = document.createElement('div');
-                productRow.className = 'row product';
-    
-                const imageColumn = document.createElement('div');
-                imageColumn.className = 'col-lg-6';
-    
-                const productImage = document.createElement('img');
-                productImage.id = 'productImage';
-                productImage.className = 'product-img';
-                productImage.src = product.image;
-                productImage.alt = 'product képe';
-    
-                imageColumn.appendChild(productImage);
-    
-                const contentColumn = document.createElement('div');
-                contentColumn.className = 'col-lg-6 product-content';
-    
-                var productTitle = document.createElement('h1');
-                productTitle.id = 'productTitle';
-                productTitle.className = 'h1';
-                productTitle.innerHTML = `<b>${product.title}</b>`;
-    
-                var productAuthor = document.createElement('h5');
-                productAuthor.id = 'productAuthor';
-                productAuthor.className = 'uploader';
-                productAuthor.innerHTML = `<b>Író neve:</b> ${product.author}`;
-    
-                var productPrice = document.createElement('h5');
-                productPrice.id = 'productPrice';
-                productPrice.className = 'product-price';
-                productPrice.textContent = `${product.price} Ft`;
-    
-                var productDesc = document.createElement('p');
-                productDesc.id = 'productDesc';
-                productDesc.className = 'product-desc';
-                productDesc.textContent = product.description;
-    
-                var newTitle = document.createElement('input');
-                newTitle.id = 'newTitle';
-                newTitle.name = 'newTitle';
-                newTitle.type = 'text';
-
-                var sNewTitle = document.createElement('a');
-                sNewTitle.id = 'addFav';
-                sNewTitle.className = 'btn btn-like';
-                sNewTitle.textContent = 'Módosítás';
-    
-                contentColumn.appendChild(productTitle);
-                contentColumn.appendChild(productAuthor);
-                contentColumn.appendChild(productPrice);
-                contentColumn.appendChild(productDesc);
-                contentColumn.appendChild(newTitle);
-                contentColumn.appendChild(sNewTitle);
-    
-                productRow.appendChild(imageColumn);
-                productRow.appendChild(contentColumn);
-    
-                productContainer.appendChild(productRow);
-                const addFav = document.getElementById("addFav");
-    
-                // ! NEW TITLE
-    
-                addFav.addEventListener("click", async (e) => {
-                e.preventDefault();
-                
-                var newTitle = document.getElementById("newTitle").value;
-
-                var myHeaders = new Headers();
-                myHeaders.append("Content-Type", "application/json");
-    
-                var raw = JSON.stringify({
-                "id": productId,
-                "title":newTitle
-                });
-    
-                var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-                };
-    
-                fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/updateBookTitle", requestOptions)
-                .then(response => response.text())
-                .then(result => {console.log(result)
-                window.location.reload();
-                })
-                .catch(error => console.log('error', error));
-            })
-    
-            } else {
-                console.error(`No product found with ID: ${productId}`);
+            if (!productId) {
+                console.error('Product ID not found in the URL.');
+                return;
             }
-            });
-        })
-        .catch(error => console.error('Error fetching data:', error));
     
-    </script>
+            fetch('http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/selectAllBooks', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const product = data.find(item => item.id == productId);
+    
+                    if (product) {
+                        const productRow = document.createElement('div');
+                        productRow.className = 'row product';
+    
+                        const imageColumn = document.createElement('div');
+                        imageColumn.className = 'col-lg-6';
+    
+                        const productImage = document.createElement('img');
+                        productImage.id = 'productImage';
+                        productImage.className = 'product-img';
+                        productImage.src = product.image;
+                        productImage.alt = 'product képe';
+    
+                        imageColumn.appendChild(productImage);
+    
+                        const contentColumn = document.createElement('div');
+                        contentColumn.className = 'col-lg-6 product-content';
+    
+                        var productTitle = document.createElement('h1');
+                        productTitle.id = 'productTitle';
+                        productTitle.className = 'h1';
+                        productTitle.innerHTML = `<b>${product.title}</b>`;
+    
+                        var productAuthor = document.createElement('h5');
+                        productAuthor.id = 'productAuthor';
+                        productAuthor.className = 'uploader';
+                        productAuthor.innerHTML = `<b>Író neve:</b> ${product.author}`;
+    
+                        var productPrice = document.createElement('h5');
+                        productPrice.id = 'productPrice';
+                        productPrice.className = 'product-price';
+                        productPrice.textContent = `${product.price} Ft`;
+    
+                        var productDesc = document.createElement('p');
+                        productDesc.id = 'productDesc';
+                        productDesc.className = 'product-desc';
+                        productDesc.textContent = product.description;
+    
+                        // új cím
+    
+                        var newTitle = document.createElement('input');
+                        newTitle.id = 'newTitle';
+                        newTitle.name = 'newTitle';
+                        newTitle.type = 'text';
+    
+                        var sNewTitle = document.createElement('a');
+                        sNewTitle.id = 'sNewTitle';
+                        sNewTitle.className = 'btn btn-like';
+                        sNewTitle.textContent = 'Módosítás';
+    
+                        // új író
+    
+                        var newAuthor = document.createElement('input');
+                        newAuthor.id = 'newAuthor';
+                        newAuthor.name = 'newAuthor';
+                        newAuthor.type = 'text';
+    
+                        var sNewAuthor = document.createElement('a');
+                        sNewAuthor.id = 'sNewAuthor';
+                        sNewAuthor.className = 'btn btn-like';
+                        sNewAuthor.textContent = 'Módosítás';
+    
+                        contentColumn.appendChild(productTitle);
+                        contentColumn.appendChild(productAuthor);
+                        contentColumn.appendChild(productPrice);
+                        contentColumn.appendChild(productDesc);
+                        contentColumn.appendChild(newTitle);
+                        contentColumn.appendChild(sNewTitle);
+                        contentColumn.appendChild(newAuthor);
+                        contentColumn.appendChild(sNewAuthor);
+    
+                        productRow.appendChild(imageColumn);
+                        productRow.appendChild(contentColumn);
+    
+                        productContainer.appendChild(productRow);
+                        const titlesubmit = document.getElementById("sNewTitle");
+    
+                        // ! NEW TITLE
+    
+                        titlesubmit.addEventListener("click", async (e) => {
+                            e.preventDefault();
+    
+                            var newTitle = document.getElementById("newTitle").value;
+    
+                            var myHeaders = new Headers();
+                            myHeaders.append("Content-Type", "application/json");
+    
+                            var raw = JSON.stringify({
+                                "id": productId,
+                                "title": newTitle
+                            });
+    
+                            var requestOptions = {
+                                method: 'POST',
+                                headers: myHeaders,
+                                body: raw,
+                                redirect: 'follow'
+                            };
+    
+                            fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/updateBookTitle", requestOptions)
+                                .then(response => response.text())
+                                .then(result => {
+                                    console.log(result);
+                                    window.location.reload();
+                                })
+                                .catch(error => console.log('error', error));
+                        });
+    
+                        // ! NEW AUTHOR
+    
+                        const authorsubmit = document.getElementById("sNewAuthor");
+    
+                        authorsubmit.addEventListener("click", async (e) => {
+                            e.preventDefault();
+    
+                            var newAuthor = document.getElementById("newAuthor").value;
+    
+                            var myHeaders = new Headers();
+                            myHeaders.append("Content-Type", "application/json");
+    
+                            var raw = JSON.stringify({
+                                "id": productId,
+                                "author": newAuthor
+                            });
+    
+                            var requestOptions = {
+                                method: 'POST',
+                                headers: myHeaders,
+                                body: raw,
+                                redirect: 'follow'
+                            };
+    
+                            fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/updateBookAuthor", requestOptions)
+                                .then(response => response.text())
+                                .then(result => {
+                                    console.log(result);
+                                    window.location.reload();
+                                })
+                                .catch(error => console.log('error', error));
+                        });
+                    } else {
+                        console.error(`No product found with ID: ${productId}`);
+                    }
+                })
+                .catch(error => console.error('Error fetching data:', error));
+            })
+        </script>    
 </div>
 
 <!-- # FOOTER -->	

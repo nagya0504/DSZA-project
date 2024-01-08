@@ -28,7 +28,7 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
           <ul class="navbar-nav nav-fill w-100">
               <li class="nav-item">
-                  <a class="nav-link" href="#">Profil</a>
+                  <a class="nav-link" href="profile.html">Profil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="index.html">Termékek</a>
@@ -90,9 +90,17 @@
                             delbtn.id = 'delbtn';
                             delbtn.className = 'btn btn-del';
                             delbtn.textContent = 'Törlés';
-                            delbtn.setAttribute('productId', product.id)
+                            delbtn.setAttribute('productId', product.id);
+    
+                            const editbtn = document.createElement('a');
+                            editbtn.id = 'editbtn';
+                            editbtn.className = 'btn btn-product';
+                            editbtn.textContent = 'Szerkesztés';
+                            editbtn.href = `editproduct.html?id=${product.id}`;
+                            editbtn.setAttribute('productId', product.id);
     
                             card.querySelector('.card-body').appendChild(viewButton);
+                            card.querySelector('.card-body').appendChild(editbtn);
                             card.querySelector('.card-body').appendChild(delbtn);
                             productContainer.appendChild(card);
     

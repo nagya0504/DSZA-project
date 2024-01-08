@@ -28,7 +28,7 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
           <ul class="navbar-nav nav-fill w-100">
               <li class="nav-item">
-                  <a class="nav-link" href="#">Profil</a>
+                  <a class="nav-link" href="profile.html">Profil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="index.html">Termékek</a>
@@ -53,25 +53,130 @@
       </div>
 </nav>
 
-<div class="row product">
-    <div class="col-lg-6">
-        <img class="product-img" src="img/card-img.png" alt="product képe">
-    </div>
-    <div class="col-lg-6 product-content">
-        <h1 class="h1"><b>Product</b></h1>
-        <h5 class="uploader"><b>Feltöltő</b></h5>
-        <br>
-        <h5 class="uploader">Jelenlegi leírás:</h5>
-        <p class="product-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam nulla accusamus harum a cum temporibus illo, veritatis excepturi placeat cupiditate doloribus necessitatibus saepe dolores libero magni dolor iure nihil molestiae.</p>
-        <label for="desc">Új leírás:</label>
-        <br>
-        <form>
-            <textarea class="textarea" id="desc" name="desc"></textarea>
-            <br>
-            <input class="btn" type="submit" value="Mentés">
-        </form>
-        <a href="ownproducts.html"><button class="btn btn-nvm">Mégse</button></a>
-    </div>
+<div id="productContainer" class="product">
+    <script>
+        var productId;
+        
+        document.addEventListener("DOMContentLoaded", function () {
+        const productContainer = document.getElementById('productContainer');
+    
+        const params = new URLSearchParams(window.location.search);
+        productId = params.get('id');
+    
+        if (!productId) {
+            console.error('Product ID not found in the URL.');
+            return;
+        }
+    
+        fetch('http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/selectAllBooks', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            const product = data.find(item => item.id == productId);
+    
+            if (product) {
+                const productRow = document.createElement('div');
+                productRow.className = 'row product';
+    
+                const imageColumn = document.createElement('div');
+                imageColumn.className = 'col-lg-6';
+    
+                const productImage = document.createElement('img');
+                productImage.id = 'productImage';
+                productImage.className = 'product-img';
+                productImage.src = product.image;
+                productImage.alt = 'product képe';
+    
+                imageColumn.appendChild(productImage);
+    
+                const contentColumn = document.createElement('div');
+                contentColumn.className = 'col-lg-6 product-content';
+    
+                var productTitle = document.createElement('h1');
+                productTitle.id = 'productTitle';
+                productTitle.className = 'h1';
+                productTitle.innerHTML = `<b>${product.title}</b>`;
+    
+                var productAuthor = document.createElement('h5');
+                productAuthor.id = 'productAuthor';
+                productAuthor.className = 'uploader';
+                productAuthor.innerHTML = `<b>Író neve:</b> ${product.author}`;
+    
+                var productPrice = document.createElement('h5');
+                productPrice.id = 'productPrice';
+                productPrice.className = 'product-price';
+                productPrice.textContent = `${product.price} Ft`;
+    
+                var productDesc = document.createElement('p');
+                productDesc.id = 'productDesc';
+                productDesc.className = 'product-desc';
+                productDesc.textContent = product.description;
+    
+                var newTitle = document.createElement('input');
+                newTitle.id = 'newTitle';
+                newTitle.name = 'newTitle';
+                newTitle.type = 'text';
+
+                var sNewTitle = document.createElement('a');
+                sNewTitle.id = 'addFav';
+                sNewTitle.className = 'btn btn-like';
+                sNewTitle.textContent = 'Módosítás';
+    
+                contentColumn.appendChild(productTitle);
+                contentColumn.appendChild(productAuthor);
+                contentColumn.appendChild(productPrice);
+                contentColumn.appendChild(productDesc);
+                contentColumn.appendChild(newTitle);
+                contentColumn.appendChild(sNewTitle);
+    
+                productRow.appendChild(imageColumn);
+                productRow.appendChild(contentColumn);
+    
+                productContainer.appendChild(productRow);
+                const addFav = document.getElementById("addFav");
+    
+                // ! NEW TITLE
+    
+                addFav.addEventListener("click", async (e) => {
+                e.preventDefault();
+                
+                var newTitle = document.getElementById("newTitle").value;
+
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+    
+                var raw = JSON.stringify({
+                "id": productId,
+                "title":newTitle
+                });
+    
+                var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+                };
+    
+                fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/updateBookTitle", requestOptions)
+                .then(response => response.text())
+                .then(result => {console.log(result)
+                window.location.reload();
+                })
+                .catch(error => console.log('error', error));
+            })
+    
+            } else {
+                console.error(`No product found with ID: ${productId}`);
+            }
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    
+    </script>
 </div>
 
 <!-- # FOOTER -->	
@@ -102,8 +207,6 @@
         </div>
     </div>
 </footer>
-
-<script src="js/updateUserTown.js"></script>
     
 </body>
 </html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- # HEADER -->
+
+<header>
+    <div class="header container-fluid mt-2 p-3"> 
+        <img class="header-img" src="img/header.png" alt="header"> 
+    </div>
+</header>
+
+<!-- # NAVBAR -->
+
+<nav class="navbar navbar-expand-sm sticky-top">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav nav-fill w-100">
+              <li class="nav-item">
+                  <a class="nav-link" href="#">Profil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Termékek</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Bejelentkezés</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="favourites.html">Kedvencek</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="aboutus.html">Rólunk</a>
+                </li>
+                <form class="d-flex input-group w-auto">
+                    <input type="search" class="kereses form-control rounded" placeholder="Keresés" aria-label="Search" aria-describedby="search-addon"/>
+                    <span class="input-group-text border-0 search-btn" id="search-addon">
+                        <img class="search-btn-img" src="img/search.png" alt="Keresés gomb">
+                    </span>
+                </form>
+            </ul>
+        </div>
+      </div>
+</nav>
+
+<!-- # PROFIL ELEMEK -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg">
+            <div class="btn-group-vertical">
+                <a href="#toggleDivUsername" id="toggleButtonUsername" class="btn btn-product profilebtn">Felhasználónév megváltoztatása</a>
+                <div id="toggleDivUsername" class="toggleDiv">
+                    <form id="updateusername">
+                        <input type="text" id="username" name="username">
+                        <br>
+                        <label for="username">Új felhasználónév</label>
+                        <br>
+                        <input id="usernamebtn" class="updatebtn btn" type="submit" value="Felhasználónév megváltoztatása">
+                        <br>
+                    </form>
+                </div>
+                <a href="#toggleDivPassword" id="toggleButtonPassword" class="btn btn-product profilebtn">Jelszó megváltoztatása</a>
+                <div id="toggleDivPassword" class="toggleDiv">
+                    <form id="updatepwd">
+                        <input type="password" id="pwd" name="pwd">
+                        <br>
+                        <label for="pwd">Új jelszó</label>
+                        <br>
+                        <input type="password" id="pwd2" name="pwd2">
+                        <br>
+                        <label for="pwd2">Jelszó mégegyszer</label>
+                        <br>
+                        <input id="updatepwdbtn" class="updatebtn btn" type="submit" value="Jelszó megváltoztatása">
+                    </form>
+                    <div id="error-message"></div>
+                </div>
+                <a href="#toggleDivTown" id="toggleButtonTown" class="btn btn-product profilebtn">Város megváltoztatása</a>
+                <div id="toggleDivTown" class="toggleDiv">
+                    <form id="updatetown">
+                        <input type="text" id="town" name="town">
+                        <br>
+                        <label for="town">Új város</label>
+                        <br>
+                        <input id="townbtn" class="updatebtn btn" type="submit" value="Város megváltoztatása">
+                        <br>
+                    </form>
+                </div>
+                <a href="#toggleDivPhone" id="toggleButtonPhone" class="btn btn-product profilebtn">Telefonszám megváltoztatása</a>
+                <div id="toggleDivPhone" class="toggleDiv">
+                    <form id="updatephone">
+                        <input type="text" id="phone" name="phone">
+                        <br>
+                        <label for="phone">Új telefonszám</label>
+                        <br>
+                        <input id="phonebtn" class="updatebtn btn" type="submit" value="Telefonszám megváltoztatása">
+                        <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg profilecol">
+            <div class="felhasznalo">
+            <p><strong>Bejelentkezve:</strong></p>
+            <div id="nameDiv">
+            <script>
+                const nameDiv = document.getElementById('nameDiv');
+                var familyName = localStorage.getItem('familyName');
+                var givenName = localStorage.getItem("givenName");
+                var fullName = document.createElement('p');
+                
+                fullName.innerHTML = `${familyName} ${givenName}`;
+                nameDiv.appendChild(fullName);
+            </script>
+            </div>
+            <a id="delbtn" class="btn btn-userdel btn-product">Felhasználó törlése</a>
+            <a href="newbook.html" class="btn btn-product profilebtn">Új könyv feltöltése</a>
+            <a href="favourites.html" class="btn btn-product profilebtn">Kedvencek</a>
+            <a href="ownproducts.html" class="btn btn-product profilebtn">Saját könyvek</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- # FOOTER -->	
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md footer-element">
+                <p>Nagy Alexandra</p>
+            </div>
+            <div class="col-md footer-element">
+                <p>Gitt Dávid</p>
+            </div>
+            <div class="col-md footer-element">
+                <p>Kovács Adrián</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md footer-element">
+                <p><a class="email" href="mailto:nagyalexandra0504@gmail.com">nagyalexandra0504@gmail.com</a></p>
+            </div>
+            <div class="col-md footer-element">
+                <p><a class="email" href="mailto:gittdavid00@gmail.com">gittdavid00@gmail.com</a></p>
+            </div>
+            <div class="col-md footer-element">
+                <p><a class="email" href="mailto:kovacsadrian2121@gmail.com">kovacsadrian2121@gmail.com</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="js/deleteUser.js"></script>
+<script src="js/updateUserPhone.js"></script>
+<script src="js/updateUserTown.js"></script>
+<script src="js/updateUserUsername.js"></script>
+<script src="js/updateUserPwd.js"></script>
+    
+</body>
+</html>

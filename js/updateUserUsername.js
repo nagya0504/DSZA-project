@@ -1,7 +1,7 @@
-var updatebtn = document.getElementById("updatetown");
+var updatebtn = document.getElementById("updateusername");
 
-function updateTown(userData) {
-    fetch('http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/user/updateUserTown', {
+function updateUsername(userData) {
+    fetch('http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/user/updateUserUsername', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -15,23 +15,23 @@ function updateTown(userData) {
         return response;
       })
       .then(data => {
-        console.log('Town changed:', data);
+        console.log('Username changed:', data);
       })
       .catch(error => {
         console.error('Error:', error);
       });
   }
 
-document.getElementById('updatetown').addEventListener('submit', function (event) {
+document.getElementById('updateusername').addEventListener('submit', function (event) {
     event.preventDefault();
   
     const id = localStorage.getItem("userId");
-    const town = document.getElementById("town").value;
+    const username = document.getElementById("username").value;
   
     const userData = {
       id: id,
-      town: town
+      username: username
     };
   
-    updateTown(userData);
+    updateUsername(userData);
   });

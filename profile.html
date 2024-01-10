@@ -37,7 +37,7 @@
                     <a class="nav-link" href="login.html">Bejelentkezés</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="registration.html">Regisztráció</a>
+                    <a class="nav-link" href="favourites.html">Kedvencek</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="aboutus.html">Rólunk</a>
@@ -61,51 +61,72 @@
             <div class="btn-group-vertical">
                 <a href="#toggleDivUsername" id="toggleButtonUsername" class="btn btn-product profilebtn">Felhasználónév megváltoztatása</a>
                 <div id="toggleDivUsername" class="toggleDiv">
-                    <input type="text" id="username" name="username">
-                    <br>
-                    <label for="username">Új felhasználónév</label>
-                    <br>
-                    <input class="updatebtn btn" type="submit" value="Felhasználónév megváltoztatása">
-                    <br>
+                    <form id="updateusername">
+                        <input type="text" id="username" name="username">
+                        <br>
+                        <label for="username">Új felhasználónév</label>
+                        <br>
+                        <input id="usernamebtn" class="updatebtn btn" type="submit" value="Felhasználónév megváltoztatása">
+                        <br>
+                    </form>
                 </div>
                 <a href="#toggleDivPassword" id="toggleButtonPassword" class="btn btn-product profilebtn">Jelszó megváltoztatása</a>
                 <div id="toggleDivPassword" class="toggleDiv">
-                    <input type="password" id="pwd" name="pwd">
-                    <br>
-                    <label for="pwd">Új jelszó</label>
-                    <br>
-                    <input type="password" id="pwd2" name="pwd2">
-                    <br>
-                    <label for="pwd2">Jelszó mégegyszer</label>
-                    <br>
-                    <input class="updatebtn btn" type="submit" value="Jelszó megváltoztatása">
+                    <form id="updatepwd">
+                        <input type="password" id="pwd" name="pwd">
+                        <br>
+                        <label for="pwd">Új jelszó</label>
+                        <br>
+                        <input type="password" id="pwd2" name="pwd2">
+                        <br>
+                        <label for="pwd2">Jelszó mégegyszer</label>
+                        <br>
+                        <input id="updatepwdbtn" class="updatebtn btn" type="submit" value="Jelszó megváltoztatása">
+                    </form>
+                    <div id="error-message"></div>
                 </div>
                 <a href="#toggleDivTown" id="toggleButtonTown" class="btn btn-product profilebtn">Város megváltoztatása</a>
                 <div id="toggleDivTown" class="toggleDiv">
-                    <input type="text" id="town" name="town">
-                    <br>
-                    <label for="town">Új város</label>
-                    <br>
-                    <input class="updatebtn btn" type="submit" value="Város megváltoztatása">
-                    <br>
+                    <form id="updatetown">
+                        <input type="text" id="town" name="town">
+                        <br>
+                        <label for="town">Új város</label>
+                        <br>
+                        <input id="townbtn" class="updatebtn btn" type="submit" value="Város megváltoztatása">
+                        <br>
+                    </form>
                 </div>
                 <a href="#toggleDivPhone" id="toggleButtonPhone" class="btn btn-product profilebtn">Telefonszám megváltoztatása</a>
                 <div id="toggleDivPhone" class="toggleDiv">
-                    <input type="text" id="phone" name="phone">
-                    <br>
-                    <label for="phone">Új telefonszám</label>
-                    <br>
-                    <input class="updatebtn btn" type="submit" value="Telefonszám megváltoztatása">
-                    <br>
+                    <form id="updatephone">
+                        <input type="text" id="phone" name="phone">
+                        <br>
+                        <label for="phone">Új telefonszám</label>
+                        <br>
+                        <input id="phonebtn" class="updatebtn btn" type="submit" value="Telefonszám megváltoztatása">
+                        <br>
+                    </form>
                 </div>
             </div>
         </div>
         <div class="col-lg profilecol">
             <div class="felhasznalo">
             <p><strong>Bejelentkezve:</strong></p>
-            <p>Példa felhasználó</p>
+            <div id="nameDiv">
+            <script>
+                const nameDiv = document.getElementById('nameDiv');
+                var familyName = localStorage.getItem('familyName');
+                var givenName = localStorage.getItem("givenName");
+                var fullName = document.createElement('p');
+                
+                fullName.innerHTML = `${familyName} ${givenName}`;
+                nameDiv.appendChild(fullName);
+            </script>
+            </div>
+            <a id="delbtn" class="btn btn-userdel btn-product">Felhasználó törlése</a>
             <a href="newbook.html" class="btn btn-product profilebtn">Új könyv feltöltése</a>
             <a href="favourites.html" class="btn btn-product profilebtn">Kedvencek</a>
+            <a href="ownproducts.html" class="btn btn-product profilebtn">Saját könyvek</a>
             </div>
         </div>
     </div>
@@ -140,7 +161,11 @@
     </div>
 </footer>
 
+<script src="js/deleteUser.js"></script>
+<script src="js/updateUserPhone.js"></script>
 <script src="js/updateUserTown.js"></script>
+<script src="js/updateUserUsername.js"></script>
+<script src="js/updateUserPwd.js"></script>
     
 </body>
 </html>

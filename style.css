@@ -138,6 +138,15 @@ footer {
     background-color: #fff;
 }
 
+.dropdown-toggle {
+    margin: 5px;
+    background-color: #5f4334;
+    border: #F2B490;
+    color: #F2B490;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+}
+
 /* # PROFIL */
 
 .profilebtn {
@@ -178,6 +187,17 @@ footer {
 
 .toggleDiv:target {
     display: block;
+}
+
+.btn-userdel {
+    color: red;
+    border-color: red;
+    margin: 30px auto;
+    background: white;
+}
+
+.btn-userdel:hover {
+    background-color: red;
 }
 
 /* # KEDVENCEK */
@@ -262,8 +282,43 @@ footer {
     margin-top: 40px;
 }
 
+.btn-like {
+    margin-bottom: 10px;
+}
+
 @media only screen and (max-width: 600px){
     .product-img {
         max-width: 200px;
     }
 }
+
+/* # EDIT PRODUCT */
+
+.btn-nvm {
+    color: red;
+    border-color: red;
+    margin-bottom: 10px;
+}
+
+.btn-nvm:hover {
+    background-color: red;
+}
+
+/* # OWNED PRODUCT */
+
+.btn-del {
+    color: red;
+    border-color: red;
+    margin-right: 10px;
+}
+
+.btn-del:hover {
+    background-color: red;
+}
+
+.small-product-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+  }
+  

@@ -37,7 +37,7 @@
                     <a class="nav-link" href="login.html">Bejelentkezés</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="registration.html">Regisztráció</a>
+                    <a class="nav-link" href="favourites.html">Kedvencek</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="aboutus.html">Rólunk</a>
@@ -55,63 +55,92 @@
 
 <!-- # KEDVENCEK CARDOK -->	
 
-<div class="container">
-    <!-- sor 1 -->
-    <div class="row">
-        <div class="col-lg">
-            <div class="card">
-                <img src="img/card-img.png" class="card-img-top" alt="card image"/>
-                <div class="card-body">
-                    <h5 class="card-title">Könyv példa</h5>
-                    <p class="card-text">Egy rövid leírás a könyvről.</p>
-                    <a href="product.html" class="btn btn-product">Megnézem</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg">
-            <div class="card">
-                <img src="img/card-img.png" class="card-img-top" alt="card image"/>
-                <div class="card-body">
-                    <h5 class="card-title">Könyv példa</h5>
-                    <p class="card-text">Egy rövid leírás a könyvről.</p>
-                    <a href="product.html" class="btn btn-product">Megnézem</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg">
-            <div class="card">
-                <img src="img/card-img.png" class="card-img-top" alt="card image"/>
-                <div class="card-body">
-                    <h5 class="card-title">Könyv példa</h5>
-                    <p class="card-text">Egy rövid leírás a könyvről.</p>
-                    <a href="product.html" class="btn btn-product">Megnézem</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- sor 2 -->
-    <div class="row">
-        <div class="col-lg">
-            <div class="card">
-                <img src="img/card-img.png" class="card-img-top" alt="card image"/>
-                <div class="card-body">
-                    <h5 class="card-title">Könyv példa</h5>
-                    <p class="card-text">Egy rövid leírás a könyvről.</p>
-                    <a href="product.html" class="btn btn-product">Megnézem</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg">
-            <div class="card">
-                <img src="img/card-img.png" class="card-img-top" alt="card image"/>
-                <div class="card-body">
-                    <h5 class="card-title">Könyv példa</h5>
-                    <p class="card-text">Egy rövid leírás a könyvről.</p>
-                    <a href="product.html" class="btn btn-product">Megnézem</a>
-                </div>
-            </div>
-        </div>
+<div class="container" id="productContainer">
+    <div class="row-cols-lg-4">
+    <!-- Products -->
+    <script>
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var userId = localStorage.getItem("userId");
+
+    var raw = JSON.stringify({
+    "userId": userId
+    });
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+    };
+
+    fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/favourite/selectAllFav", requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            const productContainer = document.getElementById('productContainer');
+
+            data.forEach(product => {
+            // console.log(product);
+                const cardColumn = document.createElement('div');
+                cardColumn.className = 'col-lg';
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                <img src="${product[6]}" class="card-img-top small-product-img" alt="card image"/>
+                    <div class="card-body">
+                        <h5 class="card-title">${product[2]}</h5>
+                        <p class="card-text">${product[5]}</p>
+                    </div>`;
+                const viewButton = document.createElement('a');
+                viewButton.href = `product.html?id=${product[1]}`;
+                viewButton.className = 'btn btn-product';
+                viewButton.textContent = 'Megnézem';
+
+                const delbtn = document.createElement('a');
+                delbtn.id = 'delbtn';
+                delbtn.className  = 'btn btn-product';
+                delbtn.textContent = 'Mégsem tetszik';
+                delbtn.setAttribute('productId', product[1])
+
+                card.querySelector('.card-body').appendChild(viewButton);
+                card.querySelector('.card-body').appendChild(delbtn);
+                productContainer.appendChild(card);
+
+                // DELETE FAV
+
+                delbtn.addEventListener("click", async (e) => {
+                        e.preventDefault();
+                        
+                        const productId = delbtn.getAttribute("productId");
+                        // console.log(userId, productId);
+
+                        var myHeaders = new Headers();
+                        myHeaders.append("Content-Type", "application/json");
+
+                        var raw = JSON.stringify({
+                            "userId": userId,
+                            "productId": productId
+                        });
+
+                        var requestOptions = {
+                            method: 'PUT',
+                            headers: myHeaders,
+                            body: raw,
+                            redirect: 'follow'
+                        };
+
+                        fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/favourite/deleteFav", requestOptions)
+                            .then(response => response.text())
+                            .then(result => {
+                                // console.log(result);
+                                window.location.reload();
+                            })
+                            .catch(error => console.log('error', error));
+                    })
+                });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    </script>
     </div>
 </div>
 
@@ -143,6 +172,7 @@
         </div>
     </div>
 </footer>
+
 
 </body>
 </html>

@@ -1,0 +1,17 @@
+com\bookmark\bookmark\Controller\ApplicationConfig.class
+com\bookmark\bookmark\Modell\Status.class
+com\bookmark\bookmark\Modell\Role.class
+com\bookmark\bookmark\Service\RoleService.class
+com\bookmark\bookmark\Controller\UserController.class
+com\bookmark\bookmark\Modell\Product.class
+com\bookmark\bookmark\Service\StatusService.class
+com\bookmart\bookmark\util\Token.class
+com\bookmark\bookmark\Controller\FavouritesController.class
+com\bookmark\bookmark\Service\FavouritesService.class
+com\bookmark\bookmark\Service\ProductService.class
+com\bookmark\bookmark\Modell\Favourites.class
+com\bookmark\bookmark\Controller\CorsFilter.class
+com\bookmark\bookmark\Service\UserService.class
+com\bookmark\bookmark\Controller\ProductController.class
+com\bookmark\bookmark\Modell\User.class
+AuthenticationFilter.class

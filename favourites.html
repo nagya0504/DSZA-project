@@ -79,7 +79,12 @@
         .then(data => {
             const productContainer = document.getElementById('productContainer');
 
-            data.forEach(product => {
+            data.forEach((product, id) => {
+                if (product.deletedAt === null) {
+                if (id % 3 === 0) {
+                  currentRow = document.createElement('div');
+                  currentRow.className = 'row';
+                }
             // console.log(product);
                 const cardColumn = document.createElement('div');
                 cardColumn.className = 'col-lg';
@@ -137,7 +142,7 @@
                             })
                             .catch(error => console.log('error', error));
                     })
-                });
+                }});
         })
         .catch(error => console.error('Error fetching data:', error));
     </script>

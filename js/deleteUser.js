@@ -18,14 +18,21 @@ delbtn.addEventListener("click", async (e) => {
     body: raw,
     redirect: 'follow'
     };
-
-    try {    
-    fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/user/logDeleteUser", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    } catch (error) {
-        console.error('error', error);
-        var errorMessageContainer = document.getElementById('error-message');
-        errorMessageContainer.innerText = 'Rossz adatokat adtál meg, kérlek próbáld újra.';
+    if (confirm("Biztosan ki akarod törölni a felhasználót?") == true) {
+      try {    
+        fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/user/logDeleteUser", requestOptions)
+        .then(response => {
+          console.log(response);
+          localStorage.clear();
+          window.location.href = '/login.html';
+        }
+        )
+        .then(result => console.log(result))
+        } catch (error) {
+            console.error('error', error);
+          }
+      } else {
+        userPreference = "Save Canceled!";
       }
+    
 })

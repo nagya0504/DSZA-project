@@ -43,7 +43,9 @@
                           loginbtn.className = 'nav-link';
                           loginbtn.href = 'login.html';
                           loginbtn.innerHTML = 'Kijelentkezés';
-                          localStorage.clear();
+                          loginbtn.addEventListener('click', () => {
+                        localStorage.clear();
+                        });
                         } else {
                           loginbtn.className = 'nav-link';
                           loginbtn.href = 'login.html';

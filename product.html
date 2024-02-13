@@ -144,6 +144,22 @@
             productPrice.className = 'product-price';
             productPrice.textContent = `${product.price} Ft`;
 
+            var productCond = document.createElement('p');
+            productCond.id = 'productCond';
+            productCond.className = 'product-cond';
+            if (product.condition == 5) {
+                productCond.textContent = 'Újszerű';
+            } else if (product.condition == 4) {
+                productCond.textContent = 'Jó állapotú';
+            } else if (product.condition == 3) {
+                productCond.textContent = "Használt";
+            } else if (product.condition == 2) {
+                productCond.textContent = "Sokat használt";
+            } else {
+                productCond.textContent = "Rossz állapotú";
+            }
+
+
             var productDesc = document.createElement('p');
             productDesc.id = 'productDesc';
             productDesc.className = 'product-desc';
@@ -157,6 +173,7 @@
             contentColumn.appendChild(productTitle);
             contentColumn.appendChild(productAuthor);
             contentColumn.appendChild(productPrice);
+            contentColumn.appendChild(productCond);
             contentColumn.appendChild(productDesc);
             contentColumn.appendChild(addButton);
 
@@ -233,8 +250,6 @@
         </div>
     </div>
 </footer>
-
-<script src="js/addFav.js"></script>
 
 </body>
 </html>

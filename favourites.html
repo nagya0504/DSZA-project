@@ -97,7 +97,7 @@
             const productContainer = document.getElementById('productContainer');
 
             data.forEach((product, id) => {
-                if (product.deletedAt === null) {
+                if (product[7] === null) {
                 if (id % 3 === 0) {
                   currentRow = document.createElement('div');
                   currentRow.className = 'row';

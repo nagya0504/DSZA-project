@@ -107,6 +107,11 @@
                     <p class="card-text">${product.description}</p>
                     <p class="card-text">${product.price} Ft</p>
                   </div>`;
+
+                if (product.statusId == 2){
+                  card.style.color = "grey";
+                }
+
                 const viewButton = document.createElement('a');
                 viewButton.href = `product.html?id=${product.id}`;
                 viewButton.className = 'btn btn-product';
@@ -158,6 +163,11 @@
                         <p class="card-text">${product.description}</p>
                         <p class="card-text">${product.price} Ft</p>
                       </div>`;
+
+                    if (product.statusId == 2){
+                      card.style.color = "grey";
+                    }
+
                     const viewButton = document.createElement('a');
                     viewButton.href = `product.html?id=${product.id}`;
                     viewButton.className = 'btn btn-product';
@@ -211,6 +221,11 @@
                         <p class="card-text">${product.description}</p>
                         <p class="card-text">${product.price} Ft</p>
                       </div>`;
+
+                    if (product.statusId == 2){
+                      card.style.color = "grey";
+                    }
+
                     const viewButton = document.createElement('a');
                     viewButton.href = `product.html?id=${product.id}`;
                     viewButton.className = 'btn btn-product';
@@ -264,6 +279,11 @@
                         <p class="card-text">${product.description}</p>
                         <p class="card-text">${product.price} Ft</p>
                       </div>`;
+
+                    if (product.statusId == 2){
+                      card.style.color = "grey";
+                    }
+
                     const viewButton = document.createElement('a');
                     viewButton.href = `product.html?id=${product.id}`;
                     viewButton.className = 'btn btn-product';

@@ -74,20 +74,6 @@
 <!-- # PRODUCT RÉSZ -->
 
 <div id="productContainer">
-<!-- <div class="row product">
-    <div class="col-lg-6">
-        <img id="productImage" class="product-img" src="img/card-img.png" alt="product képe">
-    </div>
-    <div class="col-lg-6 product-content">
-        <h1 id="productTitle" class="h1"><b>Product</b></h1>
-    
-        <h5 id="productAuthor" class="uploader"><b>Író neve</b></h5>
-        <h5 id="productPrice" class="product-price">asd</h5>
-            
-        <p id="productDesc" class="product-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam nulla accusamus harum a cum temporibus illo, veritatis excepturi placeat cupiditate doloribus necessitatibus saepe dolores libero magni dolor iure nihil molestiae.</p>
-    </div>
-</div> -->
-
 <script>
     var productId;
     
@@ -149,9 +135,9 @@
             productCond.id = 'productCond';
             productCond.className = 'product-cond';
             if (product.condition == 5) {
-                productCond.textContent = 'Újszerű';
+                productCond.textContent = "Újszerű";
             } else if (product.condition == 4) {
-                productCond.textContent = 'Jó állapotú';
+                productCond.textContent = "Jó állapotú";
             } else if (product.condition == 3) {
                 productCond.textContent = "Használt";
             } else if (product.condition == 2) {
@@ -160,6 +146,19 @@
                 productCond.textContent = "Rossz állapotú";
             }
 
+            var productStatus= document.createElement('p');
+            productStatus.id = 'productStatus';
+            productStatus.className = 'product-status';
+            if (product.statusId == 1) {
+                productStatus.textContent = "Elérhető";
+                productStatus.style.color = "green";
+            } else if (product.statusId == 2) {
+                productStatus.textContent = "Lefoglalt";
+                productStatus.style.color = "#deb607";
+            } else if (product.statusId == 3) {
+                productStatus.textContent = "Eladva";
+                productStatus.style.color = "red";
+            }
 
             var productDesc = document.createElement('p');
             productDesc.id = 'productDesc';
@@ -176,6 +175,7 @@
             contentColumn.appendChild(productPrice);
             contentColumn.appendChild(productCond);
             contentColumn.appendChild(productDesc);
+            contentColumn.appendChild(productStatus);
             contentColumn.appendChild(addButton);
 
             productRow.appendChild(imageColumn);
@@ -220,7 +220,6 @@
     .catch(error => console.error('Error fetching data:', error));
 
 </script>
-
 </div>
 
 <!-- # FOOTER -->	

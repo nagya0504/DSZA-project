@@ -34,20 +34,38 @@
                     <a class="nav-link" href="index.html">Termékek</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Bejelentkezés</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="favourites.html">Kedvencek</a>
                 </li>
+                <li class="nav-item" id="loginmenu">
+                </li>
+                    <script>
+                        const id = localStorage.getItem("userId");
+                        const loginmenu = document.getElementById("loginmenu");
+                        const loginbtn = document.createElement('a');
+                        if (id !== null){
+                        loginbtn.className = 'nav-link';
+                        loginbtn.href = 'login.html';
+                        loginbtn.innerHTML = 'Kijelentkezés';
+                        loginbtn.addEventListener('click', () => {
+                        localStorage.clear();
+                        });
+                        } else {
+                        loginbtn.className = 'nav-link';
+                        loginbtn.href = 'login.html';
+                        loginbtn.innerHTML = 'Bejelentkezés';
+                        }
+                        loginmenu.appendChild(loginbtn);
+                    </script>
+                
                 <li class="nav-item">
                     <a class="nav-link" href="aboutus.html">Rólunk</a>
                 </li>
-                <form class="d-flex input-group w-auto">
+                <!-- <form class="d-flex input-group w-auto">
                     <input type="search" class="kereses form-control rounded" placeholder="Keresés" aria-label="Search" aria-describedby="search-addon"/>
                     <span class="input-group-text border-0 search-btn" id="search-addon">
                         <img class="search-btn-img" src="img/search.png" alt="Keresés gomb">
                     </span>
-                </form>
+                </form> -->
             </ul>
         </div>
       </div>
@@ -56,20 +74,6 @@
 <!-- # PRODUCT RÉSZ -->
 
 <div id="productContainer">
-<!-- <div class="row product">
-    <div class="col-lg-6">
-        <img id="productImage" class="product-img" src="img/card-img.png" alt="product képe">
-    </div>
-    <div class="col-lg-6 product-content">
-        <h1 id="productTitle" class="h1"><b>Product</b></h1>
-    
-        <h5 id="productAuthor" class="uploader"><b>Író neve</b></h5>
-        <h5 id="productPrice" class="product-price">asd</h5>
-            
-        <p id="productDesc" class="product-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam nulla accusamus harum a cum temporibus illo, veritatis excepturi placeat cupiditate doloribus necessitatibus saepe dolores libero magni dolor iure nihil molestiae.</p>
-    </div>
-</div> -->
-
 <script>
     var productId;
     
@@ -127,6 +131,35 @@
             productPrice.className = 'product-price';
             productPrice.textContent = `${product.price} Ft`;
 
+            var productCond = document.createElement('p');
+            productCond.id = 'productCond';
+            productCond.className = 'product-cond';
+            if (product.condition == 5) {
+                productCond.textContent = "Újszerű";
+            } else if (product.condition == 4) {
+                productCond.textContent = "Jó állapotú";
+            } else if (product.condition == 3) {
+                productCond.textContent = "Használt";
+            } else if (product.condition == 2) {
+                productCond.textContent = "Sokat használt";
+            } else {
+                productCond.textContent = "Rossz állapotú";
+            }
+
+            var productStatus= document.createElement('p');
+            productStatus.id = 'productStatus';
+            productStatus.className = 'product-status';
+            if (product.statusId == 1) {
+                productStatus.textContent = "Elérhető";
+                productStatus.style.color = "green";
+            } else if (product.statusId == 2) {
+                productStatus.textContent = "Lefoglalt";
+                productStatus.style.color = "#deb607";
+            } else if (product.statusId == 3) {
+                productStatus.textContent = "Eladva";
+                productStatus.style.color = "red";
+            }
+
             var productDesc = document.createElement('p');
             productDesc.id = 'productDesc';
             productDesc.className = 'product-desc';
@@ -140,7 +173,9 @@
             contentColumn.appendChild(productTitle);
             contentColumn.appendChild(productAuthor);
             contentColumn.appendChild(productPrice);
+            contentColumn.appendChild(productCond);
             contentColumn.appendChild(productDesc);
+            contentColumn.appendChild(productStatus);
             contentColumn.appendChild(addButton);
 
             productRow.appendChild(imageColumn);
@@ -185,7 +220,6 @@
     .catch(error => console.error('Error fetching data:', error));
 
 </script>
-
 </div>
 
 <!-- # FOOTER -->	
@@ -199,9 +233,6 @@
             <div class="col-md footer-element">
                 <p>Gitt Dávid</p>
             </div>
-            <div class="col-md footer-element">
-                <p>Kovács Adrián</p>
-            </div>
         </div>
         <div class="row">
             <div class="col-md footer-element">
@@ -210,14 +241,9 @@
             <div class="col-md footer-element">
                 <p><a class="email" href="mailto:gittdavid00@gmail.com">gittdavid00@gmail.com</a></p>
             </div>
-            <div class="col-md footer-element">
-                <p><a class="email" href="mailto:kovacsadrian2121@gmail.com">kovacsadrian2121@gmail.com</a></p>
-            </div>
         </div>
     </div>
 </footer>
-
-<script src="js/addFav.js"></script>
 
 </body>
 </html>

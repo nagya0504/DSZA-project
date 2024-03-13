@@ -34,11 +34,28 @@
                     <a class="nav-link" href="#">Termékek</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Bejelentkezés</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="favourites.html">Kedvencek</a>
                 </li>
+                <li class="nav-item" id="loginmenu">
+                </li>
+                  <script>
+                    const id = localStorage.getItem("userId");
+                    const loginmenu = document.getElementById("loginmenu");
+                    const loginbtn = document.createElement('a');
+                    if (id !== null){
+                      loginbtn.className = 'nav-link';
+                      loginbtn.href = 'login.html';
+                      loginbtn.innerHTML = 'Kijelentkezés';
+                      loginbtn.addEventListener('click', () => {
+                    localStorage.clear();
+                    });
+                    } else {
+                      loginbtn.className = 'nav-link';
+                      loginbtn.href = 'login.html';
+                      loginbtn.innerHTML = 'Bejelentkezés';
+                    }
+                    loginmenu.appendChild(loginbtn);
+                  </script>
                 <li class="nav-item">
                     <a class="nav-link" href="aboutus.html">Rólunk</a>
                 </li>
@@ -90,6 +107,11 @@
                     <p class="card-text">${product.description}</p>
                     <p class="card-text">${product.price} Ft</p>
                   </div>`;
+
+                if (product.statusId == 2){
+                  card.style.color = "grey";
+                }
+
                 const viewButton = document.createElement('a');
                 viewButton.href = `product.html?id=${product.id}`;
                 viewButton.className = 'btn btn-product';
@@ -141,6 +163,11 @@
                         <p class="card-text">${product.description}</p>
                         <p class="card-text">${product.price} Ft</p>
                       </div>`;
+
+                    if (product.statusId == 2){
+                      card.style.color = "grey";
+                    }
+
                     const viewButton = document.createElement('a');
                     viewButton.href = `product.html?id=${product.id}`;
                     viewButton.className = 'btn btn-product';
@@ -194,6 +221,11 @@
                         <p class="card-text">${product.description}</p>
                         <p class="card-text">${product.price} Ft</p>
                       </div>`;
+
+                    if (product.statusId == 2){
+                      card.style.color = "grey";
+                    }
+
                     const viewButton = document.createElement('a');
                     viewButton.href = `product.html?id=${product.id}`;
                     viewButton.className = 'btn btn-product';
@@ -247,6 +279,11 @@
                         <p class="card-text">${product.description}</p>
                         <p class="card-text">${product.price} Ft</p>
                       </div>`;
+
+                    if (product.statusId == 2){
+                      card.style.color = "grey";
+                    }
+
                     const viewButton = document.createElement('a');
                     viewButton.href = `product.html?id=${product.id}`;
                     viewButton.className = 'btn btn-product';
@@ -281,9 +318,6 @@
             <div class="col-md footer-element">
                 <p>Gitt Dávid</p>
             </div>
-            <div class="col-md footer-element">
-                <p>Kovács Adrián</p>
-            </div>
         </div>
         <div class="row">
             <div class="col-md footer-element">
@@ -291,9 +325,6 @@
             </div>
             <div class="col-md footer-element">
                 <p><a class="email" href="mailto:gittdavid00@gmail.com">gittdavid00@gmail.com</a></p>
-            </div>
-            <div class="col-md footer-element">
-                <p><a class="email" href="mailto:kovacsadrian2121@gmail.com">kovacsadrian2121@gmail.com</a></p>
             </div>
         </div>
     </div>

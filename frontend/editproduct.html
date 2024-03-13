@@ -34,20 +34,37 @@
                     <a class="nav-link" href="index.html">Termékek</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Bejelentkezés</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="favourites.html">Kedvencek</a>
                 </li>
+                <li class="nav-item" id="loginmenu">
+                </li>
+                    <script>
+                        const id = localStorage.getItem("userId");
+                        const loginmenu = document.getElementById("loginmenu");
+                        const loginbtn = document.createElement('a');
+                        if (id !== null){
+                        loginbtn.className = 'nav-link';
+                        loginbtn.href = 'login.html';
+                        loginbtn.innerHTML = 'Kijelentkezés';
+                        loginbtn.addEventListener('click', () => {
+                        localStorage.clear();
+                        });
+                        } else {
+                        loginbtn.className = 'nav-link';
+                        loginbtn.href = 'login.html';
+                        loginbtn.innerHTML = 'Bejelentkezés';
+                        }
+                        loginmenu.appendChild(loginbtn);
+                    </script>
                 <li class="nav-item">
                     <a class="nav-link" href="aboutus.html">Rólunk</a>
                 </li>
-                <form class="d-flex input-group w-auto">
+                <!-- <form class="d-flex input-group w-auto">
                     <input type="search" class="kereses form-control rounded" placeholder="Keresés" aria-label="Search" aria-describedby="search-addon"/>
                     <span class="input-group-text border-0 search-btn" id="search-addon">
                         <img class="search-btn-img" src="img/search.png" alt="Keresés gomb">
                     </span>
-                </form>
+                </form> -->
             </ul>
         </div>
       </div>
@@ -157,6 +174,30 @@
                         sNewPrice.className = 'btn btn-like';
                         sNewPrice.textContent = 'Módosítás';
 
+                        //új status
+
+                        var newStatus = document.createElement('select');
+                        newStatus.id = 'newStatus';
+                        newStatus.name = 'newStatus';
+
+                        var options = [
+                            { value: '1', label: 'Elérhető' },
+                            { value: '2', label: 'Lefoglalva' },
+                            { value: '3', label: 'Eladva' }
+                        ];
+
+                        options.forEach(function(optionData) {
+                            var option = document.createElement('option');
+                            option.value = optionData.value;
+                            option.textContent = optionData.label;
+                            newStatus.appendChild(option);
+                        });
+    
+                        var sNewStatus = document.createElement('a');
+                        sNewStatus.id = 'sNewStatus';
+                        sNewStatus.className = 'btn btn-like';
+                        sNewStatus.textContent = 'Módosítás';
+
                         
                         // új leírás
     
@@ -182,6 +223,8 @@
                         contentColumn.appendChild(br);
                         contentColumn.appendChild(newPrice);
                         contentColumn.appendChild(sNewPrice);
+                        contentColumn.appendChild(newStatus);
+                        contentColumn.appendChild(sNewStatus);
                         contentColumn.appendChild(br);
                         contentColumn.appendChild(newDescription);
                         contentColumn.appendChild(sNewDescription);
@@ -289,6 +332,37 @@
                                 .catch(error => console.log('error', error));
                         });
 
+                        // ! NEW STATUS
+
+                        const statussubmit = document.getElementById("sNewStatus");
+    
+                        statussubmit.addEventListener("click", async (e) => {
+                            e.preventDefault();
+    
+                            var newStatus = document.getElementById("newStatus").value;
+
+                            const myHeaders = new Headers();
+                            myHeaders.append("Content-Type", "application/json");
+
+                            const raw = JSON.stringify({
+                            "id": productId,
+                            "statusId": newStatus
+                            });
+
+                            const requestOptions = {
+                            method: "POST",
+                            headers: myHeaders,
+                            body: raw,
+                            redirect: "follow"
+                            };
+
+                            fetch("http://127.0.0.1:8080/bookmark-1.0-SNAPSHOT/webresources/product/updateBookStatus", requestOptions)
+                            .then((response) => response.text())
+                            .then((result) => console.log(result))
+                            .catch((error) => console.error(error));
+
+                        });
+
                         // ! NEW DESCRIPTION
     
                         const descsubmit = document.getElementById("sNewDescription");
@@ -342,9 +416,6 @@
             <div class="col-md footer-element">
                 <p>Gitt Dávid</p>
             </div>
-            <div class="col-md footer-element">
-                <p>Kovács Adrián</p>
-            </div>
         </div>
         <div class="row">
             <div class="col-md footer-element">
@@ -352,9 +423,6 @@
             </div>
             <div class="col-md footer-element">
                 <p><a class="email" href="mailto:gittdavid00@gmail.com">gittdavid00@gmail.com</a></p>
-            </div>
-            <div class="col-md footer-element">
-                <p><a class="email" href="mailto:kovacsadrian2121@gmail.com">kovacsadrian2121@gmail.com</a></p>
             </div>
         </div>
     </div>

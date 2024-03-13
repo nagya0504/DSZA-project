@@ -32,7 +32,7 @@ login.addEventListener("click", async (e) => {
         const result = await response.json();
         // console.log(result);
     
-        if (result.userId !== null) {
+        if (result.userId !== null && result.deleted == false) {
         const userId = result.userId;
         const username = result.username;
         const familyName = result.familyName;

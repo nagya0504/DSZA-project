@@ -12,8 +12,9 @@ function addBook(bookData) {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        // console.log('Request Headers:', myHeaders);
         console.log('Request Payload:', JSON.stringify(bookData));
+        alert("Sikeresen feltöltve!");
+        window.location.href = "index.html"
 
         return response.json();
       })
@@ -29,20 +30,23 @@ function addBook(bookData) {
   
   bookForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-  
-    var userId = localStorage.getItem('userId');
+    
+    const userId = localStorage.getItem('userId');
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
     const price = document.getElementById('price').value;
+    const cond = document.getElementById('cond').value;
     const desc = document.getElementById('desc').value;
+    const image = document.getElementById('img').value.split('\\').pop();
   
     const bookData = {
       userId: parseInt(userId),
       title: title,
       author: author,
       price: parseInt(price),
+      cond: parseInt(cond),
       description: desc,
-      image: "kép"
+      image: "img/" + image
     };
   
     addBook(bookData);
